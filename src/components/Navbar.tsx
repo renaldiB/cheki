@@ -124,7 +124,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile & Tablet Floating Bottom Dock */}
-      <nav className="lg:hidden fixed bottom-3 inset-x-3 z-50 bg-white/95 backdrop-blur-2xl border border-cyan-100/90 rounded-3xl p-1.5 shadow-[0_16px_40px_-8px_rgba(0,180,240,0.22)] max-w-md mx-auto ponytail-spring">
+      <nav className="lg:hidden fixed bottom-3 inset-x-3 z-[99999] bg-white/95 backdrop-blur-2xl border border-cyan-100/90 rounded-3xl p-1.5 shadow-[0_16px_40px_-8px_rgba(0,180,240,0.22)] max-w-md mx-auto ponytail-spring">
         <div className="flex items-center justify-around">
           {navItems.map(({ href, shortLabel, icon: Icon }) => {
             const isActive = pathname === href;

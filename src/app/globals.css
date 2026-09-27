@@ -108,3 +108,30 @@ body {
     font-size: 16px !important;
   }
 }
+
+/* ==========================================================================
+   Netlify Badge & Injected Elements Suppression
+   Hides floating Netlify badge/drawer so it doesn't block mobile navigation
+   ========================================================================== */
+iframe[src*="netlify"],
+iframe[id*="netlify"],
+iframe[title*="Netlify" i],
+iframe[class*="netlify" i],
+div[class*="netlify-badge" i],
+div[id*="netlify-badge" i],
+[data-netlify-badge],
+[data-netlify-drawer],
+netlify-drawer,
+#netlify-badge,
+.netlify-badge {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  position: absolute !important;
+  bottom: -9999px !important;
+  right: -9999px !important;
+}
