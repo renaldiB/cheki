@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Cheki – Cek Kepatuhan Barang Bawaan Pesawat & Kapal Laut',
+  title: 'Chekii – Cek Kepatuhan Barang Bawaan Pesawat & Kapal Laut',
   description:
     'Aplikasi pintar inspeksi barang bawaan perjalanan internasional & domestik dengan AI. Dilengkapi panduan resmi Bea Cukai, aturan ICAO/IMO, dan packing checklist.',
   keywords: [
@@ -14,9 +14,18 @@ export const metadata: Metadata = {
     'bea cukai indonesia',
     'registrasi imei',
     'karantina australia',
-    'cheki',
+    'chekii',
   ],
-  authors: [{ name: 'Cheki Travel Compliance' }],
+  authors: [{ name: 'Chekii Travel Compliance' }],
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/images/cheki-mascot.png', type: 'image/png' },
+      { url: '/logo.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export const viewport: Viewport = {

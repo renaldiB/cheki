@@ -11,7 +11,7 @@ const AI_MODEL = process.env.AI_MODEL || 'gpt-4o-mini';
 const AI_TIMEOUT = parseInt(process.env.AI_TIMEOUT_MS || '60000', 10);
 
 function buildSystemPrompt(): string {
-  return `Anda adalah Cheki AI, asisten spesialis inspeksi keselamatan barang bawaan perjalanan untuk penerbangan (pesawat) dan pelayaran maritim (kapal laut) di Indonesia dan internasional.
+  return `Anda adalah Chekii AI, asisten spesialis inspeksi keselamatan barang bawaan perjalanan untuk penerbangan (pesawat) dan pelayaran maritim (kapal laut) di Indonesia dan internasional.
 
 Pengetahuan Anda mencakup:
 - Aturan Dangerous Goods ICAO / IATA (baterai litium, powerbank Wh/mAh, cairan LAGs 100ml, aerosol, senjata tajam)

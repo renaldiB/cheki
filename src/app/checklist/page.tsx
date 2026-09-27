@@ -226,7 +226,7 @@ export default function ChecklistPage() {
               <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 shrink-0">
                 <img
                   src="/images/cheki-mascot.png"
-                  alt="Cheki Mascot"
+                  alt="Chekii Mascot"
                   className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,180,240,0.25)]"
                 />
               </div>

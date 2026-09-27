@@ -413,13 +413,13 @@ export default function HomePage() {
               <div className="w-14 h-14 sm:w-18 sm:h-18 shrink-0 relative">
                 <img
                   src="/images/cheki-mascot.png"
-                  alt="Cheki Mascot"
+                  alt="Chekii Mascot"
                   className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,180,240,0.25)] hover:scale-105 transition-transform"
                 />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="font-black text-slate-900 text-sm sm:text-base">Cheki Luggage Inspector</span>
+                  <span className="font-black text-slate-900 text-sm sm:text-base">Chekii Luggage Inspector</span>
                   <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-mono text-[10px] font-bold">
                     ONLINE
                   </span>
@@ -646,7 +646,7 @@ export default function HomePage() {
                 <ShieldCheck size={18} strokeWidth={2.2} />
               </div>
               <div className="flex flex-col text-xs leading-relaxed">
-                <span className="font-bold text-slate-900">Cheki Smart Sorter Active</span>
+                <span className="font-bold text-slate-900">Chekii Smart Sorter Active</span>
                 <span className="text-slate-600 mt-0.5 font-medium">
                   Sistem otomatis memisahkan barang ke <strong className="text-primary-container font-bold">Tas Kabin</strong> vs <strong className="text-emerald-700 font-bold">Bagasi Kargo</strong> untuk mencegah penyitaan di x-ray bandara.
                 </span>

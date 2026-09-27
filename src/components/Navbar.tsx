@@ -46,13 +46,13 @@ export default function Navbar() {
               <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
                 <img
                   src="/images/cheki-mascot.png"
-                  alt="Cheki Mascot Logo"
+                  alt="Chekii Mascot Logo"
                   className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,180,240,0.2)]"
                 />
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-primary-container transition-colors">
-                  Cheki
+                  Chekii
                 </span>
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-50 text-primary-container font-mono text-[10px] font-bold border border-cyan-200/60">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>

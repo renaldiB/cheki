@@ -9,13 +9,13 @@ export default function Footer() {
             <div className="w-9 h-9 shrink-0">
               <img
                 src="/images/cheki-mascot.png"
-                alt="Cheki Mascot"
+                alt="Chekii Mascot"
                 className="w-full h-full object-contain drop-shadow-sm"
               />
             </div>
             <div>
               <div className="font-extrabold text-slate-900 text-sm tracking-tight">
-                Cheki Travel Compliance AI
+                Chekii Travel Compliance AI
               </div>
               <p className="text-[11px] text-slate-400 font-mono">
                 Sistem Inspeksi Kepatuhan Bagasi Pesawat &amp; Pelayaran Terpadu
@@ -44,7 +44,7 @@ export default function Footer() {
             ⚠️ <strong>Disclaimer Regulasi:</strong> Aturan barang berbahaya penerbangan mengacu pada standar ICAO Annex 18 &amp; Ditjen Perhubungan Udara. Regulasi maritim mengacu pada standar IMO &amp; PT Pelni. Ketentuan pabean mengacu pada PMK 203/2017 Bea Cukai Indonesia. Selalu periksa kebijakan maskapai dan operator kapal sebelum keberangkatan.
           </p>
           <div className="shrink-0 font-mono font-bold text-slate-500">
-            CHEKI-01 // AIRPORT READY
+            CHEKII-01 // AIRPORT READY
           </div>
         </div>
       </div>

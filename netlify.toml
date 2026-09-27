@@ -1,4 +1,4 @@
-# Netlify Configuration for Cheki Next.js App
+# Netlify Configuration for Chekii Next.js App
 [build]
   command = "npm run build"
   publish = ".next"
