@@ -1,0 +1,110 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+        '26': '6.5rem',
+        '30': '7.5rem',
+      },
+      colors: {
+        // Stitch Design System - Light Cyber Ice Palette
+        surface: '#f6fafe',
+        'surface-dim': '#d6dade',
+        'surface-bright': '#f6fafe',
+        'surface-container-lowest': '#ffffff',
+        'surface-container-low': '#f0f4f8',
+        'surface-container': '#eaeef2',
+        'surface-container-high': '#e4e9ed',
+        'surface-container-highest': '#dfe3e7',
+        'surface-variant': '#dfe3e7',
+        'on-surface': '#171c1f',
+        'on-surface-variant': '#3d484f',
+        'inverse-surface': '#2c3134',
+        'inverse-on-surface': '#edf1f5',
+        outline: '#6d7980',
+        'outline-variant': '#bdc8d1',
+        
+        primary: {
+          DEFAULT: '#006689',
+          container: '#00b4f0',
+          fixed: '#c3e8ff',
+          'fixed-dim': '#79d1ff',
+        },
+        'on-primary': '#ffffff',
+        'on-primary-container': '#00425a',
+        'primary-container': '#00b4f0',
+        'primary-fixed': '#c3e8ff',
+        'primary-fixed-dim': '#79d1ff',
+
+        secondary: {
+          DEFAULT: '#006c46',
+          container: '#3ffdae',
+          fixed: '#4dffb2',
+          'fixed-dim': '#00e297',
+        },
+        'on-secondary': '#ffffff',
+        'on-secondary-container': '#007149',
+        'secondary-container': '#3ffdae',
+        'secondary-fixed': '#4dffb2',
+        'secondary-fixed-dim': '#00e297',
+
+        tertiary: '#515f78',
+        'tertiary-container': '#9aa8c4',
+        'tertiary-fixed': '#d6e3ff',
+
+        error: '#ba1a1a',
+        'error-container': '#ffdad6',
+        'on-error': '#ffffff',
+        'on-error-container': '#93000a',
+
+        // Backward-compatible tokens
+        brand: {
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+        },
+        ocean: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
+      },
+      boxShadow: {
+        'soft-sm': '0 2px 8px -1px rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.03)',
+        'soft-md': '0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 3px 8px -2px rgba(0, 0, 0, 0.04)',
+        'soft-lg': '0 16px 36px -6px rgba(0, 0, 0, 0.1), 0 6px 16px -4px rgba(0, 0, 0, 0.06)',
+        'glow-cyan': '0 0 32px -4px rgba(0, 180, 240, 0.25)',
+        'glow-emerald': '0 0 25px -5px rgba(0, 229, 153, 0.3)',
+        'cyber-ice': '0 8px 32px -4px rgba(0, 180, 240, 0.12), 0 2px 8px -2px rgba(10, 25, 47, 0.04)',
+        'cyber-elevated': '0 16px 40px -8px rgba(0, 180, 240, 0.15), 0 4px 12px -2px rgba(10, 25, 47, 0.04)',
+      },
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Plus Jakarta Sans', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
+};

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #f6fafe;
+  color: #171c1f;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Light Cyber Ice dot-matrix background */
+.bg-cyber-dotmatrix {
+  background-image: radial-gradient(rgba(0, 180, 240, 0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00b4f0;
+}
+
+/* Glassmorphism Styles from Stitch - Optimized for 60/120fps */
+.glass-panel-ice {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 234, 254, 0.8);
+}
+
+.glass-panel-elevated {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 180, 240, 0.25);
+  box-shadow: 0 16px 40px -8px rgba(0, 180, 240, 0.14);
+}
+
+/* Ponytail Spring Physics & Micro-interactions */
+.ponytail-spring {
+  transition: all 0.35s cubic-bezier(0.34, 1.45, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+.tap-spring {
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tap-spring:active {
+  transform: scale(0.96);
+}
+
+.travel-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.28s cubic-bezier(0.34, 1.45, 0.64, 1);
+  will-change: transform;
+}
+.travel-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area insets for mobile edge-to-edge screens */
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+/* Prevent mobile iOS zoom on input */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}

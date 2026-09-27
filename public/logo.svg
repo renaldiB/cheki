@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="cyberIce" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B4F0" />
+      <stop offset="100%" stop-color="#00E599" />
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2EEF8" />
+    </linearGradient>
+    <filter id="iceGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#00B4F0" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Mascot Outer Body (Cheki Suitcase) -->
+  <rect x="28" y="32" width="104" height="106" rx="28" fill="url(#bodyGrad)" stroke="#C8EAFE" stroke-width="2.5" filter="url(#iceGlow)"/>
+  <!-- Top Handle -->
+  <rect x="62" y="16" width="36" height="18" rx="7" fill="none" stroke="#64748B" stroke-width="4.5"/>
+  <rect x="70" y="14" width="20" height="5" rx="2.5" fill="#00B4F0"/>
+  <!-- Dark OLED Dot Matrix Screen Visor -->
+  <rect x="40" y="46" width="80" height="48" rx="16" fill="#0B132B" stroke="#00B4F0" stroke-width="1.5"/>
+  <!-- Visor Pixel Eyes (Happy Wings/Scan Eyes) -->
+  <path d="M52 68 Q58 60 66 68" stroke="#00E599" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <circle cx="59" cy="74" r="1.5" fill="#00E599"/>
+  <path d="M94 68 Q102 60 108 68" stroke="#00E599" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <circle cx="101" cy="74" r="1.5" fill="#00E599"/>
+  <!-- Holographic scanner laser line inside visor -->
+  <line x1="44" y1="52" x2="116" y2="52" stroke="#00B4F0" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+  <!-- Corner Polycarbonate Bumpers -->
+  <path d="M30 48 C30 40 36 34 44 34" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M130 48 C130 40 124 34 116 34" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M30 122 C30 130 36 136 44 136" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M130 122 C130 130 124 136 116 136" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Woven Yellow Tag Hanging on Side with perfectly centered typography -->
+  <g transform="translate(122, 80) rotate(8)">
+    <!-- Yellow Tag Card: width 24, height 44, rx 5 -->
+    <rect x="0" y="0" width="24" height="44" rx="5" fill="#FACC15" filter="url(#iceGlow)"/>
+    <!-- Stitch / Grommet slot on top -->
+    <rect x="7" y="3.5" width="10" height="2.5" rx="1.2" fill="#0F172A"/>
+    <!-- Centered text CHEKI-01 oriented vertically along center line (x=12, y=26) -->
+    <text x="12" y="26" font-family="'Plus Jakarta Sans', monospace, sans-serif" font-size="6.5" font-weight="900" fill="#0F172A" text-anchor="middle" dominant-baseline="central" transform="rotate(90 12 26)" letter-spacing="0.8">CHEKI-01</text>
+  </g>
+  <!-- Miniature Caster Wheels -->
+  <rect x="42" y="136" width="12" height="12" rx="4" fill="#1E293B"/>
+  <circle cx="48" cy="142" r="3" fill="#64748B"/>
+  <rect x="106" y="136" width="12" height="12" rx="4" fill="#1E293B"/>
+  <circle cx="112" cy="142" r="3" fill="#64748B"/>
+  <!-- AI Status Beacon on Chest -->
+  <circle cx="80" cy="112" r="4.5" fill="url(#cyberIce)"/>
+  <circle cx="80" cy="112" r="8" stroke="#00E599" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.8"/>
+</svg>
