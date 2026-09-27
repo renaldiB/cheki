@@ -12,6 +12,7 @@ export interface CountryRegulation {
   countryCode: string;
   countryName: string;
   flag: string;
+  region?: 'asia' | 'europe' | 'other';
   planeRules: RegulationRule[];
   shipRules: RegulationRule[];
   customsLimits: CustomsLimit[];

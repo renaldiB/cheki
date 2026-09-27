@@ -19,6 +19,7 @@ import {
 
 type TabTransport = 'all' | 'plane' | 'ship';
 type TabSection = 'rules' | 'customs' | 'quarantine';
+type TabRegion = 'all' | 'asia' | 'europe' | 'other';
 
 export default function RegulationsPage() {
   const [search, setSearch] = useState('');
@@ -27,6 +28,7 @@ export default function RegulationsPage() {
   const [transport, setTransport] = useState<TabTransport>('all');
   const [section, setSection] = useState<TabSection>('rules');
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [regionFilter, setRegionFilter] = useState<TabRegion>('all');
 
   const country = COUNTRY_REGULATIONS.find(c => c.countryCode === selectedCode);
   
@@ -55,10 +57,21 @@ export default function RegulationsPage() {
     return true;
   });
 
-  const filteredCountries = COUNTRY_REGULATIONS.filter(c =>
-    c.countryName.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-    c.countryCode.toLowerCase().includes(debouncedSearch.toLowerCase())
-  );
+  const countAll = COUNTRY_REGULATIONS.length;
+  const countAsia = COUNTRY_REGULATIONS.filter(c => c.region === 'asia').length;
+  const countEurope = COUNTRY_REGULATIONS.filter(c => c.region === 'europe').length;
+
+  const filteredCountries = COUNTRY_REGULATIONS.filter(c => {
+    if (regionFilter !== 'all' && c.region !== regionFilter) return false;
+    if (debouncedSearch.trim()) {
+      const q = debouncedSearch.toLowerCase();
+      return (
+        c.countryName.toLowerCase().includes(q) ||
+        c.countryCode.toLowerCase().includes(q)
+      );
+    }
+    return true;
+  });
 
   return (
     <div className="pb-32 sm:pb-36 md:pb-20 bg-cyber-dotmatrix min-h-screen">
@@ -187,13 +200,20 @@ export default function RegulationsPage() {
               <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
                 <span className="text-slate-400 font-bold px-1 uppercase tracking-wider">HUB CEPAT:</span>
                 {[
-                  { label: '[CGK] Soekarno-Hatta (ID)', code: 'ID' },
-                  { label: '[SIN] Changi (SG)', code: 'SG' },
-                  { label: '[SYD] Sydney (AU)', code: 'AU' },
-                  { label: '[HND] Tokyo Haneda (JP)', code: 'JP' },
-                  { label: '[JED] King Abdulaziz (SA)', code: 'SA' },
-                  { label: '[KUL] Kuala Lumpur (MY)', code: 'MY' },
-                  { label: '[JFK] New York (US)', code: 'US' },
+                  { label: '[CGK] Jakarta (ID)', code: 'ID', region: 'asia' },
+                  { label: '[KUL] Kuala Lumpur (MY)', code: 'MY', region: 'asia' },
+                  { label: '[SIN] Changi (SG)', code: 'SG', region: 'asia' },
+                  { label: '[BKK] Bangkok (TH)', code: 'TH', region: 'asia' },
+                  { label: '[HND] Tokyo (JP)', code: 'JP', region: 'asia' },
+                  { label: '[ICN] Seoul (KR)', code: 'KR', region: 'asia' },
+                  { label: '[JED] Jeddah (SA)', code: 'SA', region: 'asia' },
+                  { label: '[DXB] Dubai (AE)', code: 'AE', region: 'asia' },
+                  { label: '[AMS] Amsterdam (NL)', code: 'NL', region: 'europe' },
+                  { label: '[CDG] Paris (FR)', code: 'FR', region: 'europe' },
+                  { label: '[FRA] Frankfurt (DE)', code: 'DE', region: 'europe' },
+                  { label: '[ZRH] Zurich (CH)', code: 'CH', region: 'europe' },
+                  { label: '[LHR] London (GB)', code: 'GB', region: 'europe' },
+                  { label: '[SYD] Sydney (AU)', code: 'AU', region: 'other' },
                 ].map(hub => (
                   <button
                     key={hub.code}
@@ -201,6 +221,9 @@ export default function RegulationsPage() {
                     onClick={() => {
                       setSelectedCode(hub.code);
                       setCategoryFilter('all');
+                      if (regionFilter !== 'all' && regionFilter !== hub.region) {
+                        setRegionFilter('all');
+                      }
                     }}
                     className={clsx(
                       'px-2.5 py-1 rounded-full border transition-all tap-spring font-medium',
@@ -221,9 +244,51 @@ export default function RegulationsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           {/* Left Sidebar (4 Cols) */}
           <div className="lg:col-span-4 bg-white/90 backdrop-blur-2xl rounded-3xl p-5 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.1)] border border-cyan-100/90 space-y-3 ponytail-spring">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block px-1">
-              Daftar Jurisdiksi Resmi ({COUNTRY_REGULATIONS.length})
-            </span>
+            <div className="flex items-center justify-between px-1">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+                Daftar Jurisdiksi ({filteredCountries.length}/{COUNTRY_REGULATIONS.length})
+              </span>
+            </div>
+
+            {/* Region Filter Buttons */}
+            <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-2xl border border-slate-200/60 shadow-inner">
+              <button
+                type="button"
+                onClick={() => setRegionFilter('all')}
+                className={clsx(
+                  'py-1.5 px-2 rounded-xl text-xs font-bold transition-all tap-spring text-center',
+                  regionFilter === 'all'
+                    ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200'
+                    : 'text-slate-600 hover:text-slate-900'
+                )}
+              >
+                Semua ({countAll})
+              </button>
+              <button
+                type="button"
+                onClick={() => setRegionFilter('asia')}
+                className={clsx(
+                  'py-1.5 px-2 rounded-xl text-xs font-bold transition-all tap-spring text-center',
+                  regionFilter === 'asia'
+                    ? 'bg-primary-container text-white shadow-sm ring-1 ring-cyan-200'
+                    : 'text-slate-600 hover:text-slate-900'
+                )}
+              >
+                Asia ({countAsia})
+              </button>
+              <button
+                type="button"
+                onClick={() => setRegionFilter('europe')}
+                className={clsx(
+                  'py-1.5 px-2 rounded-xl text-xs font-bold transition-all tap-spring text-center',
+                  regionFilter === 'europe'
+                    ? 'bg-primary-container text-white shadow-sm ring-1 ring-cyan-200'
+                    : 'text-slate-600 hover:text-slate-900'
+                )}
+              >
+                Eropa ({countEurope})
+              </button>
+            </div>
 
             <div className="space-y-1 max-h-[50vh] sm:max-h-[55vh] overflow-y-auto pr-1">
               {filteredCountries.map(c => {
