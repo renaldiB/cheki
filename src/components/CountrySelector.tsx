@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Globe, Search, Sparkles, X, Check, MapPin } from 'lucide-react';
+import { ChevronDown, Globe, Search, Sparkles, X, Check, MapPin, Plane, Ship } from 'lucide-react';
 import { POPULAR_COUNTRIES } from '@/data/countries';
 import { DOMESTIC_LOCATIONS } from '@/data/domestic-locations';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -235,24 +235,24 @@ export default function CountrySelector({
             {isDomestic ? (
               selectedDomestic ? (
                 <>
-                  <span className="text-base shrink-0">
-                    {selectedDomestic.type === 'port' ? '🚢' : '✈️'}
+                  <span className="text-slate-500 shrink-0">
+                    {selectedDomestic.type === 'port' ? <Ship size={15} /> : <Plane size={15} />}
                   </span>
                   <span className="font-semibold text-slate-900 truncate">
                     {selectedDomestic.name}
                   </span>
-                  <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono font-bold shrink-0">
+                  <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono font-medium shrink-0">
                     {selectedDomestic.code}
                   </span>
                 </>
               ) : value ? (
                 <>
-                  <span className="text-base shrink-0">📍</span>
+                  <span className="text-slate-500 shrink-0"><MapPin size={15} /></span>
                   <span className="font-semibold text-slate-900 truncate">{value}</span>
-                  <span className="text-[10px] bg-cyan-100 text-cyan-800 px-1.5 py-0.5 rounded font-bold shrink-0">Domestik</span>
+                  <span className="text-[10px] bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded font-medium shrink-0 border border-sky-200">Domestik</span>
                 </>
               ) : (
-                <span className="text-slate-400 font-medium truncate">{placeholder || defaultPlaceholder}</span>
+                <span className="text-slate-400 font-normal truncate">{placeholder || defaultPlaceholder}</span>
               )
             ) : (
               selectedCountry ? (
@@ -262,18 +262,18 @@ export default function CountrySelector({
                 </>
               ) : value ? (
                 <>
-                  <span className="text-base shrink-0">🌍</span>
+                  <span className="text-slate-500 shrink-0"><Globe size={15} /></span>
                   <span className="font-semibold text-slate-900 truncate">{value}</span>
-                  <span className="text-[10px] bg-cyan-100 text-cyan-800 px-1.5 py-0.5 rounded font-bold shrink-0">Kustom</span>
+                  <span className="text-[10px] bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded font-medium shrink-0 border border-sky-200">Kustom</span>
                 </>
               ) : (
-                <span className="text-slate-400 font-medium truncate">{placeholder || defaultPlaceholder}</span>
+                <span className="text-slate-400 font-normal truncate">{placeholder || defaultPlaceholder}</span>
               )
             )}
           </div>
           <ChevronDown
             size={16}
-            className={clsx('text-slate-400 shrink-0 transition-transform duration-200 ml-1.5', open && 'rotate-180 text-primary-container')}
+            className={clsx('text-slate-400 shrink-0 transition-transform duration-200 ml-1.5', open && 'rotate-180 text-sky-600')}
           />
         </button>
       )}
@@ -333,26 +333,26 @@ export default function CountrySelector({
                       className={clsx(
                         'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors text-left',
                         isSelected
-                          ? 'bg-cyan-50 text-primary-container font-bold'
+                          ? 'bg-sky-50 text-sky-700 font-semibold'
                           : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                       )}
                     >
                       <div className="flex items-center gap-2.5 truncate min-w-0">
-                        <span className="text-base shrink-0">
-                          {loc.type === 'port' ? '🚢' : '✈️'}
+                        <span className="shrink-0 text-slate-400">
+                          {loc.type === 'port' ? <Ship size={14} /> : <Plane size={14} />}
                         </span>
                         <div className="truncate min-w-0">
-                          <span className="block truncate font-semibold">{loc.name}</span>
+                          <span className="block truncate font-medium text-slate-800">{loc.name}</span>
                           <span className="block text-[10px] text-slate-400 font-normal truncate">
                             Wilayah {loc.island}
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                        <span className="text-[10px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">
+                        <span className="text-[10px] font-mono font-medium bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">
                           {loc.code}
                         </span>
-                        {isSelected && <Check size={16} className="text-primary-container" />}
+                        {isSelected && <Check size={15} className="text-sky-600" />}
                       </div>
                     </button>
                   );
@@ -405,19 +405,19 @@ export default function CountrySelector({
                       className={clsx(
                         'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors text-left',
                         isSelected
-                          ? 'bg-cyan-50 text-primary-container font-bold'
+                          ? 'bg-sky-50 text-sky-700 font-semibold'
                           : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                       )}
                     >
                       <div className="flex items-center gap-2.5 truncate min-w-0">
                         <span className="text-xl leading-none shrink-0">{c.flag}</span>
-                        <span className="truncate font-semibold text-slate-800">{c.name}</span>
+                        <span className="truncate font-medium text-slate-800">{c.name}</span>
                       </div>
                       <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                        <span className="text-[10px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">
+                        <span className="text-[10px] font-mono font-medium bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">
                           {c.code}
                         </span>
-                        {isSelected && <Check size={16} className="text-primary-container" />}
+                        {isSelected && <Check size={15} className="text-sky-600" />}
                       </div>
                     </button>
                   );
@@ -436,13 +436,13 @@ export default function CountrySelector({
                         setOpen(false);
                         setSearch('');
                       }}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-primary-container text-xs font-bold transition-colors border border-cyan-200"
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-semibold transition-colors border border-sky-200"
                     >
                       <div className="flex items-center gap-1.5 truncate">
                         <Sparkles size={14} className="shrink-0" />
                         <span className="truncate">Gunakan &quot;{search.trim()}&quot; (Analisa AI)</span>
                       </div>
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded font-mono font-bold shrink-0">
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded font-mono font-medium shrink-0">
                         Kustom
                       </span>
                     </button>

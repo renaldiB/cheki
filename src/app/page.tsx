@@ -23,20 +23,21 @@ import {
   BookmarkPlus,
   CheckCheck,
   Info,
-  Sparkles,
+  Globe,
+  RotateCcw,
 } from 'lucide-react';
 
 type TransportMode = 'plane' | 'ship';
 
 const FREQUENT_CHIPS = [
-  { label: '⚡ Powerbank 20.000mAh (74Wh)', value: 'Powerbank 20000mAh' },
-  { label: '🥘 Rendang Daging Jar (300g)', value: 'Rendang Daging Sapi kemasan vacuum' },
-  { label: '💨 Disposable Vape Pod (2ml)', value: 'Vape Pod elektrik' },
-  { label: '✂️ Pisau Lipat Multi-Tool', value: 'Pisau lipat serbaguna' },
-  { label: '💻 Laptop MacBook Pro (99Wh)', value: 'Laptop MacBook Pro 16 inch' },
-  { label: '🧴 Spray Parfum Aerosol 150ml', value: 'Parfum botol 150ml' },
-  { label: '📦 iPhone 16 Pro Baru ($1,199)', value: 'Smartphone iPhone baru luar negeri' },
-  { label: '🍈 Durian Kupas Segar', value: 'Durian kemasan kotak' },
+  { label: 'Powerbank 20.000mAh (74Wh)', value: 'Powerbank 20000mAh' },
+  { label: 'Rendang Daging Sapi Vacuum (300g)', value: 'Rendang Daging Sapi kemasan vacuum' },
+  { label: 'Disposable Vape Pod (2ml)', value: 'Vape Pod elektrik' },
+  { label: 'Pisau Lipat Multi-Tool', value: 'Pisau lipat serbaguna' },
+  { label: 'Laptop MacBook Pro 16" (99Wh)', value: 'Laptop MacBook Pro 16 inch' },
+  { label: 'Spray Deodorant Aerosol 150ml', value: 'Parfum aerosol 150ml' },
+  { label: 'Smartphone Baru Luar Negeri ($1,199)', value: 'Smartphone iPhone baru luar negeri' },
+  { label: 'Kopi Bubuk Arabika Kemasan 250g', value: 'Kopi bubuk kemasan' },
 ];
 
 export default function HomePage() {
@@ -260,45 +261,39 @@ export default function HomePage() {
 
   return (
     <div className="pb-32 sm:pb-36 md:pb-20 bg-cyber-dotmatrix min-h-screen">
-      {/* Background Ambient Glows */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-cyan-400/15 blur-3xl"></div>
-        <div className="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-emerald-400/15 blur-3xl"></div>
-      </div>
-
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-3.5 sm:px-6 pt-26 sm:pt-28 md:pt-32 space-y-5 sm:space-y-6">
         {/* HUD Bento Row: Travel Mode & Route Terminal */}
-        <section className="w-full bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 relative z-20 ponytail-spring space-y-4">
+        <section className="w-full bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200 relative z-20 space-y-4">
           {/* Top Row: Mode Switches & Baggage Allowance Status */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             {/* Mode Switches */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
               {/* Transport Switch */}
-              <div className="grid grid-cols-2 sm:inline-flex p-1 bg-slate-100 rounded-2xl border border-slate-200/60 w-full sm:w-auto shadow-inner">
+              <div className="grid grid-cols-2 sm:inline-flex p-1 bg-slate-100 rounded-2xl border border-slate-200/60 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={() => setTransport('plane')}
                   className={clsx(
-                    'px-3 sm:px-4 py-2.5 rounded-xl font-black text-xs flex items-center justify-center gap-1.5 transition-all tap-spring',
+                    'px-3 sm:px-4 py-2.5 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]',
                     transport === 'plane'
-                      ? 'bg-white text-primary-container shadow-sm ring-1 ring-cyan-200/70'
-                      : 'text-slate-600 hover:text-slate-900 font-bold'
+                      ? 'bg-white text-sky-700 shadow-sm ring-1 ring-slate-200'
+                      : 'text-slate-600 hover:text-slate-900'
                   )}
                 >
-                  <Plane size={15} strokeWidth={2.3} className="shrink-0" />
+                  <Plane size={15} strokeWidth={2} className="shrink-0" />
                   <span>Pesawat <span className="hidden sm:inline font-mono text-[10px] text-slate-400">(ICAO)</span></span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setTransport('ship')}
                   className={clsx(
-                    'px-3 sm:px-4 py-2.5 rounded-xl font-black text-xs flex items-center justify-center gap-1.5 transition-all tap-spring',
+                    'px-3 sm:px-4 py-2.5 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]',
                     transport === 'ship'
-                      ? 'bg-white text-ocean-600 shadow-sm ring-1 ring-ocean-200/70'
-                      : 'text-slate-600 hover:text-slate-900 font-bold'
+                      ? 'bg-white text-slate-800 shadow-sm ring-1 ring-slate-200'
+                      : 'text-slate-600 hover:text-slate-900'
                   )}
                 >
-                  <Ship size={15} strokeWidth={2.3} className="shrink-0" />
+                  <Ship size={15} strokeWidth={2} className="shrink-0" />
                   <span>Kapal Laut <span className="hidden sm:inline font-mono text-[10px] text-slate-400">(IMO)</span></span>
                 </button>
               </div>
@@ -315,9 +310,9 @@ export default function HomePage() {
                     setDestIsCustom(false);
                   }}
                   className={clsx(
-                    'px-3 sm:px-4 py-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all tap-spring',
+                    'px-3 sm:px-4 py-2 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]',
                     tripType === 'domestic'
-                      ? 'bg-primary-container text-white shadow-sm'
+                      ? 'bg-sky-600 text-white shadow-sm'
                       : 'text-slate-600 hover:text-slate-900'
                   )}
                 >
@@ -334,9 +329,9 @@ export default function HomePage() {
                     setDestIsCustom(false);
                   }}
                   className={clsx(
-                    'px-3 sm:px-4 py-2 rounded-xl font-bold text-xs flex items-center justify-center transition-all tap-spring',
+                    'px-3 sm:px-4 py-2 rounded-xl font-semibold text-xs flex items-center justify-center transition-all active:scale-[0.98]',
                     tripType === 'international'
-                      ? 'bg-primary-container text-white shadow-sm'
+                      ? 'bg-sky-600 text-white shadow-sm'
                       : 'text-slate-600 hover:text-slate-900'
                   )}
                 >
@@ -346,13 +341,13 @@ export default function HomePage() {
             </div>
 
             {/* Allowance Metric Capsule */}
-            <div className="flex items-center gap-2.5 px-3.5 py-2 bg-cyan-50/70 border border-cyan-200 rounded-2xl text-slate-700 text-xs shrink-0 self-start lg:self-auto">
-              <Luggage size={18} className="text-primary-container shrink-0" strokeWidth={2.2} />
+            <div className="flex items-center gap-2.5 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 text-xs shrink-0 self-start lg:self-auto">
+              <Luggage size={18} className="text-sky-600 shrink-0" strokeWidth={2} />
               <div className="flex flex-col">
-                <span className="font-bold text-slate-900 text-[11px] leading-tight font-sans">
+                <span className="font-semibold text-slate-900 text-[11px] leading-tight font-sans">
                   {transport === 'plane' ? 'Standar Bagasi Udara' : 'Standar Bagasi Pelni'}
                 </span>
-                <span className="text-[10px] text-slate-500 font-medium">
+                <span className="text-[10px] text-slate-500 font-normal">
                   {transport === 'plane' ? 'Maks 20kg Bagasi • 7kg Kabin' : 'Maks 40kg Bagasi Tercatat'}
                 </span>
               </div>
@@ -380,10 +375,10 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={handleSwapRoute}
-                  className="w-9 h-9 rounded-full bg-slate-100 hover:bg-cyan-50 hover:text-primary-container border border-slate-200 text-slate-600 shadow-sm flex items-center justify-center transition-all tap-spring hover:scale-105"
+                  className="w-9 h-9 rounded-full bg-slate-100 hover:bg-sky-50 hover:text-sky-600 border border-slate-200 text-slate-600 shadow-sm flex items-center justify-center transition-all active:scale-[0.98]"
                   title="Tukar Asal & Tujuan"
                 >
-                  <ArrowLeftRight size={16} strokeWidth={2.2} />
+                  <ArrowLeftRight size={16} strokeWidth={2} />
                 </button>
               </div>
 
@@ -404,28 +399,28 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Interactive Holographic Scanner & Cheki Mascot Section */}
+        {/* Interactive Scanner & Cheki Mascot Section */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
-          {/* Left 7 Cols: Holographic Scanner Feed & Cheki Mascot */}
-          <div className="lg:col-span-7 bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-7 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 space-y-5 ponytail-spring">
+          {/* Left 7 Cols: Scanner Feed & Cheki Mascot */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-5">
             {/* Mascot Banner */}
-            <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-cyan-50/90 to-emerald-50/90 border border-cyan-200/70">
-              <div className="w-14 h-14 sm:w-18 sm:h-18 shrink-0 relative">
+            <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 relative">
                 <img
                   src="/images/cheki-mascot.png"
                   alt="Chekii Mascot"
-                  className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,180,240,0.25)] hover:scale-105 transition-transform"
+                  className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="font-black text-slate-900 text-sm sm:text-base">Chekii Luggage Inspector</span>
-                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-mono text-[10px] font-bold">
+                  <span className="font-bold text-slate-900 text-sm sm:text-base">Chekii Luggage Inspector</span>
+                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-mono text-[10px] font-semibold">
                     ONLINE
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                  &quot;Bip-bop! Masukkan barang bawaanmu. Aku akan memindai aturan ICAO Annex 18, batasan Bea Cukai, serta ketentuan karantina antar pulau!&quot;
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  Masukkan barang bawaanmu. Sistem akan memindai aturan ICAO Annex 18, batasan Bea Cukai, serta ketentuan karantina.
                 </p>
               </div>
             </div>
@@ -433,20 +428,20 @@ export default function HomePage() {
             {/* Input Header & Mode Switch */}
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <h2 className="font-black text-slate-900 text-base sm:text-lg tracking-tight">
+                <h2 className="font-bold text-slate-900 text-base sm:text-lg tracking-tight">
                   Pemeriksaan Barang Bawaan
                 </h2>
-                <p className="text-xs text-slate-500 font-medium">
+                <p className="text-xs text-slate-500 font-normal">
                   Ketik daftar barang yang ingin Anda bawa di perjalanan
                 </p>
               </div>
 
-              <div className="flex bg-slate-100 p-1 rounded-2xl text-xs font-bold border border-slate-200/60">
+              <div className="flex bg-slate-100 p-1 rounded-2xl text-xs font-semibold border border-slate-200/60">
                 <button
                   type="button"
                   onClick={() => setInputMode('text')}
                   className={clsx(
-                    'px-3 py-1.5 rounded-xl transition-all tap-spring',
+                    'px-3 py-1.5 rounded-xl transition-all active:scale-[0.98]',
                     inputMode === 'text'
                       ? 'bg-white text-slate-900 shadow-sm'
                       : 'text-slate-500 hover:text-slate-800'
@@ -458,7 +453,7 @@ export default function HomePage() {
                   type="button"
                   onClick={() => setInputMode('structured')}
                   className={clsx(
-                    'px-3 py-1.5 rounded-xl transition-all tap-spring',
+                    'px-3 py-1.5 rounded-xl transition-all active:scale-[0.98]',
                     inputMode === 'structured'
                       ? 'bg-white text-slate-900 shadow-sm'
                       : 'text-slate-500 hover:text-slate-800'
@@ -478,7 +473,7 @@ export default function HomePage() {
                     onChange={e => setRawText(e.target.value)}
                     rows={4}
                     placeholder="Contoh: Powerbank 20000mAh di bagasi, Parfum 150ml di kabin, Rendang, Gunting kuku, Laptop, Vape..."
-                    className="w-full p-3.5 sm:p-4 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container font-medium leading-relaxed resize-none shadow-sm placeholder:text-slate-400"
+                    className="w-full p-3.5 sm:p-4 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600 font-normal leading-relaxed resize-none shadow-sm placeholder:text-slate-400"
                   />
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] text-slate-400 px-1">
@@ -486,7 +481,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => setRawText('')}
-                    className="text-slate-400 hover:text-rose-500 font-bold self-end sm:self-auto tap-spring"
+                    className="text-slate-400 hover:text-rose-500 font-semibold self-end sm:self-auto active:scale-[0.98]"
                   >
                     Bersihkan
                   </button>
@@ -497,7 +492,7 @@ export default function HomePage() {
                 {structuredItems.length === 0 ? (
                   <div className="py-6 px-4 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50 space-y-1.5">
                     <Luggage size={24} className="mx-auto text-slate-300" />
-                    <p className="text-xs font-bold text-slate-700">Daftar Barang Masih Kosong</p>
+                    <p className="text-xs font-semibold text-slate-700">Daftar Barang Masih Kosong</p>
                     <p className="text-[11px] text-slate-400 max-w-sm mx-auto">
                       Ketik barang secara manual dengan tombol di bawah, atau klik kartu pada <strong className="text-slate-600">Frequent Travel Pack</strong> di samping.
                     </p>
@@ -509,7 +504,7 @@ export default function HomePage() {
                       className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-2.5 bg-slate-50 border border-slate-200 rounded-2xl"
                     >
                       <div className="flex-1 flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-slate-400 pl-1">
+                        <span className="text-xs font-mono font-semibold text-slate-400 pl-1">
                           #{idx + 1}
                         </span>
                         <input
@@ -522,7 +517,7 @@ export default function HomePage() {
                             );
                           }}
                           placeholder="Nama barang bawaan (contoh: Powerbank 20.000mAh)..."
-                          className="w-full px-3 py-1.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-primary-container font-medium"
+                          className="w-full px-3 py-1.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-sky-600 font-normal"
                         />
                       </div>
 
@@ -535,11 +530,11 @@ export default function HomePage() {
                               prev.map(i => (i.id === item.id ? { ...i, placement: val } : i))
                             );
                           }}
-                          className="px-3 py-1.5 text-xs font-bold bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-primary-container text-slate-700"
+                          className="px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-sky-600 text-slate-700"
                         >
-                          <option value="either">🎒/🧳 Bebas Pilih</option>
-                          <option value="cabin">🎒 Rencana: Kabin</option>
-                          <option value="checkin">🧳 Rencana: Bagasi Kargo</option>
+                          <option value="either">Bebas Pilih</option>
+                          <option value="cabin">Rencana: Tas Kabin</option>
+                          <option value="checkin">Rencana: Bagasi Kargo</option>
                         </select>
 
                         <button
@@ -547,7 +542,7 @@ export default function HomePage() {
                           onClick={() =>
                             setStructuredItems(prev => prev.filter(i => i.id !== item.id))
                           }
-                          className="p-1.5 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-white transition-colors tap-spring"
+                          className="p-1.5 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-white transition-colors active:scale-[0.98]"
                         >
                           <Trash2 size={16} />
                         </button>
@@ -564,7 +559,7 @@ export default function HomePage() {
                       { id: `item-${Date.now()}`, name: '', placement: 'either' },
                     ])
                   }
-                  className="w-full py-2.5 px-4 rounded-xl border border-dashed border-slate-300 text-slate-600 hover:text-primary-container hover:border-primary-container font-bold text-xs flex items-center justify-center gap-1.5 transition-colors tap-spring"
+                  className="w-full py-2.5 px-4 rounded-xl border border-dashed border-slate-300 text-slate-600 hover:text-sky-600 hover:border-sky-400 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors active:scale-[0.98]"
                 >
                   <Plus size={16} />
                   <span>Tambah Baris Barang</span>
@@ -573,28 +568,38 @@ export default function HomePage() {
             )}
 
             {error && (
-              <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs font-bold text-rose-800 flex items-center gap-2.5 animate-in fade-in-50">
-                <AlertTriangle size={18} className="text-rose-600 shrink-0" />
-                <span>{error}</span>
+              <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-center justify-between gap-3 animate-in fade-in-50">
+                <div className="flex items-center gap-2.5">
+                  <AlertTriangle size={18} className="text-rose-600 shrink-0" />
+                  <span className="font-semibold">{error}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAnalyze}
+                  className="px-3 py-1 bg-white border border-rose-300 hover:bg-rose-100 rounded-lg text-rose-800 font-semibold text-xs shrink-0 transition-colors active:scale-[0.98] flex items-center gap-1"
+                >
+                  <RotateCcw size={13} />
+                  <span>Coba Lagi</span>
+                </button>
               </div>
             )}
 
-            {/* Scan Button (Glowing Holographic Pill) */}
+            {/* Scan Button (Solid sky-600 primary CTA) */}
             <button
               type="button"
               onClick={handleAnalyze}
               disabled={loading}
               className={clsx(
-                'w-full py-3.5 sm:py-4 px-6 rounded-full font-black text-sm sm:text-base flex items-center justify-center gap-2.5 sm:gap-3 transition-all duration-300 shadow-[0_8px_32px_rgba(0,180,240,0.3)] tap-spring',
+                'w-full py-3.5 sm:py-4 px-6 rounded-full font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 sm:gap-3 transition-all duration-150 shadow-sm active:scale-[0.98]',
                 loading
                   ? 'bg-slate-800 text-white cursor-wait'
-                  : 'bg-gradient-to-r from-[#00B4F0] via-[#00c5a2] to-[#00E599] hover:opacity-95 text-white'
+                  : 'bg-sky-600 hover:bg-sky-700 text-white'
               )}
             >
               {loading ? (
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span className="text-xs sm:text-sm font-bold">
+                  <span className="text-xs sm:text-sm font-semibold">
                     {loadingStep === 1
                       ? 'Memindai Regulasi ICAO & Maritim...'
                       : loadingStep === 2
@@ -604,24 +609,24 @@ export default function HomePage() {
                 </div>
               ) : (
                 <>
-                  <Radar size={20} className="animate-spin" strokeWidth={2.3} style={{ animationDuration: '4s' }} />
+                  <Radar size={20} className="animate-spin" strokeWidth={2} style={{ animationDuration: '4s' }} />
                   <span>Pindai Kepatuhan Barang dengan AI</span>
-                  <ArrowRight size={18} strokeWidth={2.3} />
+                  <ArrowRight size={18} strokeWidth={2} />
                 </>
               )}
             </button>
           </div>
 
-          {/* Right 5 Cols: Quick-Add Sensor Library & Hardware Badges */}
-          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 flex flex-col justify-between space-y-4 ponytail-spring">
+          {/* Right 5 Cols: Quick-Add Sensor Library */}
+          <div className="lg:col-span-5 bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
             <div>
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span className="font-black text-slate-900 text-base">Frequent Travel Pack</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                <span className="font-bold text-slate-900 text-base">Frequent Travel Pack</span>
+                <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
                   Klik untuk Tambah
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed font-medium">
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
                 Pilih barang populer untuk memvalidasi batasan Dangerous Goods ICAO &amp; Bea Cukai secara instan.
               </p>
 
@@ -632,7 +637,7 @@ export default function HomePage() {
                     key={idx}
                     type="button"
                     onClick={() => handleAddChip(chip.value)}
-                    className="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-cyan-50 hover:text-primary-container text-slate-700 text-xs font-semibold border border-slate-200 hover:border-cyan-200 transition-all tap-spring flex items-center gap-1 shadow-sm"
+                    className="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-sky-50 hover:text-sky-700 text-slate-700 text-xs font-semibold border border-slate-200 hover:border-sky-200 transition-all active:scale-[0.98] flex items-center gap-1 shadow-sm"
                   >
                     <span>{chip.label}</span>
                   </button>
@@ -641,35 +646,103 @@ export default function HomePage() {
             </div>
 
             {/* Cheki Advisory Note Card */}
-            <div className="p-4 rounded-2xl bg-cyan-50/80 border border-cyan-200/80 flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                <ShieldCheck size={18} strokeWidth={2.2} />
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                <ShieldCheck size={18} strokeWidth={2} />
               </div>
               <div className="flex flex-col text-xs leading-relaxed">
                 <span className="font-bold text-slate-900">Chekii Smart Sorter Active</span>
-                <span className="text-slate-600 mt-0.5 font-medium">
-                  Sistem otomatis memisahkan barang ke <strong className="text-primary-container font-bold">Tas Kabin</strong> vs <strong className="text-emerald-700 font-bold">Bagasi Kargo</strong> untuk mencegah penyitaan di x-ray bandara.
+                <span className="text-slate-600 mt-0.5 font-normal">
+                  Sistem otomatis memisahkan barang ke <strong className="text-sky-700 font-semibold">Tas Kabin</strong> vs <strong className="text-emerald-700 font-semibold">Bagasi Kargo</strong> untuk mencegah penyitaan di x-ray bandara.
                 </span>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Loading State: Structured Skeleton Manifest */}
+        {loading && (
+          <section className="space-y-6 pt-2 animate-in fade-in-50 duration-200">
+            <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-4 animate-pulse">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                <div className="space-y-2">
+                  <div className="h-5 w-56 bg-slate-200 rounded-lg" />
+                  <div className="h-3.5 w-72 bg-slate-100 rounded" />
+                </div>
+                <div className="h-9 w-44 bg-slate-100 rounded-full" />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="h-20 bg-slate-50 border border-slate-100 rounded-2xl" />
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="h-4 w-48 bg-slate-200 rounded animate-pulse" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="h-56 bg-white border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3 animate-pulse">
+                    <div className="flex justify-between items-start">
+                      <div className="h-4 w-32 bg-slate-200 rounded" />
+                      <div className="h-5 w-16 bg-slate-100 rounded-full" />
+                    </div>
+                    <div className="h-14 bg-slate-50 rounded-xl" />
+                    <div className="h-8 bg-slate-100 rounded-xl w-full" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Empty Initial State with CTA */}
+        {!result && !loading && !error && (
+          <section className="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200 text-center space-y-3">
+            <div className="w-14 h-14 rounded-2xl bg-sky-50 text-sky-700 flex items-center justify-center mx-auto shadow-sm">
+              <Luggage size={28} strokeWidth={1.8} />
+            </div>
+            <div className="max-w-md mx-auto space-y-1">
+              <h3 className="font-bold text-slate-800 text-base">Manifest Siap Diperiksa</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                Pilih rute perjalanan dan masukkan daftar barang bawaan Anda di atas, lalu klik <strong>Pindai Kepatuhan Barang dengan AI</strong> untuk memulai inspeksi.
+              </p>
+            </div>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.querySelector('textarea');
+                  el?.focus();
+                }}
+                className="px-4 py-2 text-xs font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-xl transition-all active:scale-[0.98]"
+              >
+                Mulai Masukkan Barang
+              </button>
+            </div>
+          </section>
+        )}
+
         {/* Results Section: Luggage Manifest & Inspection Boarding Pass Cards */}
         {result && (
           <section className="space-y-6 pt-2 animate-in fade-in-50 duration-300">
             {/* Header & Metrics */}
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 space-y-4 ponytail-spring">
+            <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 size={22} className="text-primary-container shrink-0" strokeWidth={2.4} />
-                    <h2 className="font-black text-slate-900 text-lg sm:text-xl tracking-tight">
+                    <CheckCircle2 size={22} className="text-sky-600 shrink-0" strokeWidth={2} />
+                    <h2 className="font-bold text-slate-900 text-lg sm:text-xl tracking-tight">
                       Luggage Compliance Manifest
                     </h2>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 font-medium">
-                    Rute: {origin} ➔ {destination} ({transport === 'plane' ? '✈️ Pesawat ICAO' : '🚢 Kapal Laut IMO'})
+                  <p className="text-xs text-slate-500 mt-1 font-normal flex items-center gap-1.5">
+                    <span>Rute: {origin} ➔ {destination}</span>
+                    <span className="text-slate-300">•</span>
+                    <span className="flex items-center gap-1">
+                      {transport === 'plane' ? <Plane size={13} className="shrink-0" /> : <Ship size={13} className="shrink-0" />}
+                      <span>{transport === 'plane' ? 'Pesawat ICAO' : 'Kapal Laut IMO'}</span>
+                    </span>
                   </p>
                 </div>
 
@@ -679,16 +752,16 @@ export default function HomePage() {
                     onClick={handleSaveAllToChecklist}
                     disabled={allSavedToChecklist}
                     className={clsx(
-                      'px-4 py-2 rounded-full font-bold text-xs flex items-center gap-2 transition-all shadow-sm tap-spring',
+                      'px-4 py-2 rounded-full font-semibold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-[0.98]',
                       allSavedToChecklist
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-primary-container hover:bg-cyan-600 text-white'
+                        : 'bg-sky-600 hover:bg-sky-700 text-white'
                     )}
                   >
                     {allSavedToChecklist ? (
-                      <CheckCheck size={16} strokeWidth={2.4} />
+                      <CheckCheck size={16} strokeWidth={2} />
                     ) : (
-                      <BookmarkPlus size={16} strokeWidth={2.2} />
+                      <BookmarkPlus size={16} strokeWidth={2} />
                     )}
                     <span>
                       {allSavedToChecklist
@@ -702,32 +775,32 @@ export default function HomePage() {
               {/* Status Counters */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
                 <div className="p-3.5 bg-[#E6FCF5] border border-[#A7F3D0] rounded-2xl text-center">
-                  <div className="text-2xl font-black text-[#059669]">{allowedItems.length}</div>
-                  <div className="text-xs font-bold text-[#059669]">Aman (Boleh)</div>
+                  <div className="text-2xl font-bold text-[#059669]">{allowedItems.length}</div>
+                  <div className="text-xs font-semibold text-[#059669]">Aman (Boleh)</div>
                 </div>
                 <div className="p-3.5 bg-[#FEF3C7] border border-[#FDE68A] rounded-2xl text-center">
-                  <div className="text-2xl font-black text-[#D97706]">{conditionalItems.length}</div>
-                  <div className="text-xs font-bold text-[#D97706]">Boleh Bersyarat</div>
+                  <div className="text-2xl font-bold text-[#D97706]">{conditionalItems.length}</div>
+                  <div className="text-xs font-semibold text-[#D97706]">Boleh Bersyarat</div>
                 </div>
                 <div className="p-3.5 bg-[#FFE4E6] border border-[#FECDD3] rounded-2xl text-center">
-                  <div className="text-2xl font-black text-[#E11D48]">{forbiddenItems.length}</div>
-                  <div className="text-xs font-bold text-[#E11D48]">Dilarang Keras</div>
+                  <div className="text-2xl font-bold text-[#E11D48]">{forbiddenItems.length}</div>
+                  <div className="text-xs font-semibold text-[#E11D48]">Dilarang Keras</div>
                 </div>
                 <div className="p-3.5 bg-rose-100/70 border border-rose-300 rounded-2xl text-center">
-                  <div className="text-2xl font-black text-rose-700">{warningItems.length}</div>
-                  <div className="text-xs font-bold text-rose-800">Salah Penempatan</div>
+                  <div className="text-2xl font-bold text-rose-700">{warningItems.length}</div>
+                  <div className="text-xs font-semibold text-rose-800">Salah Penempatan</div>
                 </div>
               </div>
 
               {/* High-Impact Alert Banner if any hazardous items */}
               {warningItems.length > 0 && (
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 text-white space-y-1 shadow-md ponytail-spring">
-                  <div className="flex items-center gap-2 font-black text-sm">
-                    <AlertTriangle size={18} className="animate-bounce shrink-0" strokeWidth={2.4} />
-                    <span>PERHATIAN: Ditemukan {warningItems.length} Barang Berbahaya di Tas yang Salah!</span>
+                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-300 text-rose-900 space-y-1 shadow-sm">
+                  <div className="flex items-center gap-2 font-bold text-sm text-rose-800">
+                    <AlertTriangle size={18} className="text-rose-600 shrink-0" strokeWidth={2} />
+                    <span>PERHATIAN: Ditemukan {warningItems.length} Barang Berbahaya di Tas yang Salah</span>
                   </div>
-                  <p className="text-xs text-white/95 leading-relaxed font-medium">
-                    Baterai litium, powerbank, dan vape DILARANG ditaruh di bagasi check-in kargo pesawat. Periksa kartu di bawah dan gunakan tombol &quot;Tukar Tas&quot;.
+                  <p className="text-xs text-rose-700 leading-relaxed font-normal">
+                    Baterai litium, powerbank, dan vape dilarang ditaruh di bagasi check-in kargo pesawat. Periksa kartu di bawah dan gunakan tombol &quot;Tukar Tas&quot;.
                   </p>
                 </div>
               )}
@@ -735,11 +808,11 @@ export default function HomePage() {
               {/* General Guidance */}
               {result.generalAdvice && (
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
-                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <Info size={15} className="text-primary-container shrink-0" />
+                  <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <Info size={15} className="text-sky-600 shrink-0" />
                     <span>Arahan Keselamatan Perjalanan:</span>
                   </span>
-                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-700 leading-relaxed font-normal">
                     {result.generalAdvice}
                   </p>
                 </div>
@@ -747,12 +820,12 @@ export default function HomePage() {
 
               {/* Destination Specific Notes */}
               {result.countrySpecificNotes && (
-                <div className="p-4 bg-cyan-50/70 border border-cyan-200 rounded-2xl space-y-1">
-                  <span className="text-xs font-bold text-cyan-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <span>🌍</span>
+                <div className="p-4 bg-sky-50/80 border border-sky-200 rounded-2xl space-y-1">
+                  <span className="text-xs font-semibold text-sky-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <Globe size={15} className="text-sky-700 shrink-0" />
                     <span>Ketentuan Otoritas: {destination}</span>
                   </span>
-                  <p className="text-xs text-cyan-900 leading-relaxed font-medium">
+                  <p className="text-xs text-sky-900 leading-relaxed font-normal">
                     {result.countrySpecificNotes}
                   </p>
                 </div>
@@ -761,11 +834,11 @@ export default function HomePage() {
               {/* Customs Notes */}
               {result.customsInfo && (
                 <div className="p-4 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-1">
-                  <span className="text-xs font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <span>🛄</span>
+                  <span className="text-xs font-semibold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <ShieldCheck size={15} className="text-amber-700 shrink-0" />
                     <span>Informasi Bea Cukai &amp; Karantina:</span>
                   </span>
-                  <p className="text-xs text-amber-900 leading-relaxed font-medium">
+                  <p className="text-xs text-amber-900 leading-relaxed font-normal">
                     {result.customsInfo}
                   </p>
                 </div>
@@ -774,7 +847,7 @@ export default function HomePage() {
 
             {/* Individual Item Cards */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">
+              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-1">
                 Daftar Hasil Inspeksi Per Barang ({result.results.length})
               </h3>
 

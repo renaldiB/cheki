@@ -6,8 +6,8 @@ export const CUSTOMS_INFO = {
   sections: [
     {
       id: 'barang-bawaan',
-      title: '🛄 Pembebasan Barang Bawaan',
-      icon: '🛄',
+      title: 'Pembebasan Barang Bawaan',
+      icon: 'luggage',
       items: [
         { label: 'Batas Bebas Bea Masuk', value: 'FOB USD 500 per orang', description: 'Barang bawaan penumpang (bukan kiriman) senilai s/d USD 500 dibebaskan dari Bea Masuk dan PPN.' },
         { label: 'Anak-anak', value: 'FOB USD 500 per anak', description: 'Anak yang bepergian bersama orang tua tetap mendapat fasilitas pembebasan USD 500 sendiri.' },
@@ -16,8 +16,8 @@ export const CUSTOMS_INFO = {
     },
     {
       id: 'imei',
-      title: '📱 Registrasi IMEI Gadget',
-      icon: '📱',
+      title: 'Registrasi IMEI Gadget',
+      icon: 'smartphone',
       items: [
         { label: 'Wajib Daftarkan', value: 'HP, Tablet, Laptop, Komputer', description: 'Perangkat komunikasi & elektronik yang dibeli di luar negeri wajib didaftarkan IMEI-nya.' },
         { label: 'Cara Daftar', value: 'Aplikasi Bea Cukai / beacukai.go.id', description: 'Bisa didaftarkan sebelum berangkat atau setibanya di Indonesia. Setelah 90 hari tanpa registrasi, perangkat tidak bisa digunakan di jaringan Indonesia.' },
@@ -27,8 +27,8 @@ export const CUSTOMS_INFO = {
     },
     {
       id: 'rokok-alkohol',
-      title: '🚬 Rokok & Alkohol',
-      icon: '🚬',
+      title: 'Rokok & Minuman Beralkohol',
+      icon: 'wine',
       items: [
         { label: 'Rokok Bebas Bea', value: '200 batang / 25 cerutu / 100g tembakau', description: 'Per orang dewasa (≥18 tahun). Kelebihan akan dimusnahkan oleh petugas atau dikenakan cukai.' },
         { label: 'Minuman Beralkohol', value: 'Maks 1 liter per orang dewasa', description: 'Hanya untuk penumpang berusia ≥21 tahun. Jenis apapun (wine, beer, spirits). Kelebihan dimusnahkan.' },
@@ -37,8 +37,8 @@ export const CUSTOMS_INFO = {
     },
     {
       id: 'uang',
-      title: '💰 Uang Tunai & Instrumen Keuangan',
-      icon: '💰',
+      title: 'Uang Tunai & Instrumen Keuangan',
+      icon: 'banknote',
       items: [
         { label: 'Batas Lapor', value: '≥ Rp 100.000.000 atau setara valas', description: 'Membawa uang tunai senilai Rp 100 juta ke atas WAJIB dilaporkan ke Bea Cukai. Tidak dilarang, tapi harus lapor.' },
         { label: 'Instrumen Keuangan', value: 'Cek, wesel, dll.', description: 'Instrumen keuangan (cek, promissory notes) senilai ≥ Rp 100 juta juga wajib dilaporkan.' },
@@ -47,8 +47,8 @@ export const CUSTOMS_INFO = {
     },
     {
       id: 'ecd',
-      title: '📋 Electronic Customs Declaration (e-CD)',
-      icon: '📋',
+      title: 'Electronic Customs Declaration (e-CD)',
+      icon: 'file-text',
       items: [
         { label: 'Cara Mengisi', value: 'Aplikasi Mobile Bea Cukai / bea.go.id', description: 'Isi e-CD sebelum tiba di Indonesia untuk mempercepat proses. Atau isi formulir kertas di pesawat.' },
         { label: 'Yang Harus Dideklarasikan', value: 'Barang melebihi batas, uang ≥ Rp 100 juta, hewan/tanaman', description: 'Selalu jujur dalam mengisi formulir. Ketidakjujuran bisa dikenakan sanksi.' },

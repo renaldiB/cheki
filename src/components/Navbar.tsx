@@ -39,23 +39,23 @@ export default function Navbar() {
     <>
       {/* Top Floating Header (Desktop, Tablet & Mobile) */}
       <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-6 pt-2 pb-1 pointer-events-none">
-        <div className="max-w-[1280px] mx-auto h-16 md:h-18 bg-white/90 backdrop-blur-2xl rounded-full px-3.5 sm:px-5 flex items-center justify-between border border-cyan-100/90 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.12),0_2px_8px_-2px_rgba(10,25,47,0.04)] pointer-events-auto ponytail-spring">
+        <div className="max-w-[1280px] mx-auto h-16 md:h-18 bg-white/95 rounded-full px-3.5 sm:px-5 flex items-center justify-between border border-slate-200 shadow-sm pointer-events-auto">
           {/* Brand Logo with Cheki Mascot */}
           <div className="flex items-center gap-2.5">
-            <Link href="/" className="flex items-center gap-2 group tap-spring">
-              <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
+            <Link href="/" className="flex items-center gap-2 group active:scale-[0.98] transition-transform">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 transition-transform duration-200 group-hover:scale-105">
                 <img
                   src="/images/cheki-mascot.png"
                   alt="Chekii Mascot Logo"
-                  className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,180,240,0.2)]"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-primary-container transition-colors">
+                <span className="font-bold text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">
                   Chekii
                 </span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-50 text-primary-container font-mono text-[10px] font-bold border border-cyan-200/60">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 font-mono text-[10px] font-semibold border border-sky-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-600 animate-pulse"></span>
                   <span>AI</span>
                 </span>
               </div>
@@ -63,7 +63,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop & Tablet Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 p-1 bg-slate-100/80 rounded-full border border-slate-200/50">
+          <nav className="hidden lg:flex items-center gap-1 p-1 bg-slate-100 rounded-full border border-slate-200/80">
             {navItems.map(({ href, label, icon: Icon }) => {
               const isActive = pathname === href;
               return (
@@ -71,19 +71,19 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   className={clsx(
-                    'px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs transition-all flex items-center gap-1.5 tap-spring',
+                    'px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold text-xs transition-all flex items-center gap-1.5 active:scale-[0.98]',
                     isActive
-                      ? 'bg-primary-container text-white shadow-[0_4px_16px_rgba(0,180,240,0.3)]'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/70'
+                      ? 'bg-sky-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
                   )}
                 >
-                  <Icon size={16} strokeWidth={2.2} />
+                  <Icon size={15} strokeWidth={2} />
                   <span>{label}</span>
                   {href === '/checklist' && checklistCount > 0 && (
                     <span
                       className={clsx(
-                        'px-1.5 py-0.2 rounded-full text-[10px] font-extrabold font-mono',
-                        isActive ? 'bg-white text-primary-container' : 'bg-slate-200 text-slate-700'
+                        'px-1.5 py-0.2 rounded-full text-[10px] font-bold font-mono',
+                        isActive ? 'bg-white text-sky-700' : 'bg-slate-200 text-slate-700'
                       )}
                     >
                       {checklistCount}
@@ -96,25 +96,25 @@ export default function Navbar() {
 
           {/* Right Status Capsules & Quick Actions */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 font-mono text-[11px] font-bold border border-emerald-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-300/50 animate-pulse"></span>
+            <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 font-mono text-[11px] font-medium border border-emerald-200">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>ICAO &amp; Bea Cukai 2025</span>
             </div>
 
-            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-mono text-[11px]">
-              <span className="text-primary font-bold">USD/IDR</span>
-              <span className="font-semibold">16.250</span>
+            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-mono text-[11px] border border-slate-200/60">
+              <span className="text-slate-500 font-medium">USD/IDR</span>
+              <span className="font-semibold text-slate-800">16.250</span>
             </div>
 
             {/* Quick Checklist Shortcut Pill */}
             <Link
               href="/checklist"
-              className="relative p-2 rounded-full bg-cyan-50 hover:bg-cyan-100 text-primary-container border border-cyan-200 transition-all tap-spring flex items-center justify-center"
+              className="relative p-2 rounded-full bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200 hover:border-sky-300 transition-all flex items-center justify-center active:scale-[0.98]"
               title="Packing Checklist"
             >
-              <Luggage size={18} strokeWidth={2.2} />
+              <Luggage size={18} strokeWidth={2} />
               {checklistCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary-container text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-sky-600 text-white text-[9px] font-bold flex items-center justify-center shadow-sm">
                   {checklistCount}
                 </span>
               )}
@@ -124,7 +124,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile & Tablet Floating Bottom Dock */}
-      <nav className="lg:hidden fixed bottom-3 inset-x-3 z-[99999] bg-white/95 backdrop-blur-2xl border border-cyan-100/90 rounded-3xl p-1.5 shadow-[0_16px_40px_-8px_rgba(0,180,240,0.22)] max-w-md mx-auto ponytail-spring">
+      <nav className="lg:hidden fixed bottom-3 inset-x-3 z-[99999] bg-white border border-slate-200/90 rounded-2xl p-1 shadow-lg max-w-md mx-auto">
         <div className="flex items-center justify-around">
           {navItems.map(({ href, shortLabel, icon: Icon }) => {
             const isActive = pathname === href;
@@ -133,23 +133,23 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 className={clsx(
-                  'flex flex-col items-center justify-center py-1.5 px-3 rounded-2xl transition-all relative flex-1 tap-spring',
+                  'flex flex-col items-center justify-center py-1.5 px-3 rounded-xl transition-all relative flex-1 active:scale-[0.98]',
                   isActive
-                    ? 'text-primary-container font-black'
+                    ? 'text-sky-600 font-semibold'
                     : 'text-slate-500 hover:text-slate-900 font-medium'
                 )}
               >
                 <div
                   className={clsx(
-                    'p-1.5 rounded-xl transition-all',
-                    isActive ? 'bg-cyan-50 text-primary-container shadow-sm' : ''
+                    'p-1.5 rounded-lg transition-colors',
+                    isActive ? 'bg-sky-50 text-sky-600' : ''
                   )}
                 >
-                  <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                  <Icon size={18} strokeWidth={isActive ? 2.2 : 1.8} />
                 </div>
-                <span className="text-[10px] mt-0.5 tracking-tight font-bold">{shortLabel}</span>
+                <span className="text-[10px] mt-0.5 tracking-tight font-medium">{shortLabel}</span>
                 {href === '/checklist' && checklistCount > 0 && (
-                  <span className="absolute top-1 right-3 w-4 h-4 text-[9px] font-mono font-bold bg-primary-container text-white rounded-full flex items-center justify-center shadow-sm">
+                  <span className="absolute top-1 right-3 w-4 h-4 text-[9px] font-mono font-bold bg-sky-600 text-white rounded-full flex items-center justify-center shadow-sm">
                     {checklistCount}
                   </span>
                 )}

@@ -14,6 +14,11 @@ import {
   Check,
   PlusCircle,
   BatteryWarning,
+  Backpack,
+  Luggage,
+  FileText,
+  Lightbulb,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface LuggageCardProps {
@@ -40,7 +45,7 @@ export default function LuggageCard({
     ? 'bg-rose-500'
     : result.status === 'conditional'
     ? 'bg-amber-400'
-    : 'bg-[#00E599]';
+    : 'bg-emerald-500';
 
   const isCabin = result.placement === 'cabin';
   const isCheckin = result.placement === 'checkin';
@@ -54,15 +59,15 @@ export default function LuggageCard({
   };
 
   return (
-    <div className="relative bg-white rounded-2xl p-4 sm:p-5 shadow-[0_4px_24px_-4px_rgba(0,180,240,0.1)] border border-cyan-100/90 flex flex-col justify-between overflow-hidden ponytail-spring hover:shadow-[0_12px_36px_-6px_rgba(0,180,240,0.15)] hover:-translate-y-0.5">
+    <div className="relative bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/90 flex flex-col justify-between overflow-hidden transition-all duration-150 hover:border-slate-300 hover:shadow-md">
       {/* Left Color Spine */}
-      <div className={clsx('absolute left-0 top-0 bottom-0 w-1.5', spineColor)}></div>
+      <div className={clsx('absolute left-0 top-0 bottom-0 w-1', spineColor)}></div>
 
       <div className="space-y-3 pl-1.5">
         {/* Top Meta Bar */}
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-mono text-[11px] font-bold text-slate-400 uppercase">
+            <span className="font-mono text-xs font-normal text-slate-400">
               #{String(index + 1).padStart(2, '0')}
             </span>
             <StatusBadge status={result.status} size="sm" />
@@ -77,10 +82,10 @@ export default function LuggageCard({
                   result.placement === 'cabin' ? 'checkin' : 'cabin'
                 )
               }
-              className="text-[11px] font-bold text-slate-500 hover:text-primary-container px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-cyan-50 transition-colors flex items-center gap-1.5 shrink-0 tap-spring"
+              className="text-xs font-medium text-slate-500 hover:text-sky-700 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-sky-50 border border-slate-200/60 transition-colors flex items-center gap-1.5 shrink-0 active:scale-[0.98]"
               title="Ganti penempatan tas"
             >
-              <ArrowLeftRight size={13} strokeWidth={2.2} />
+              <ArrowLeftRight size={13} strokeWidth={2} />
               <span>Tukar Tas</span>
             </button>
           )}
@@ -90,24 +95,24 @@ export default function LuggageCard({
         <div className="flex items-center gap-3">
           <div
             className={clsx(
-              'w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ponytail-spring',
+              'w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border',
               hasWarning
-                ? 'bg-rose-100 text-rose-600'
+                ? 'bg-rose-50 text-rose-600 border-rose-200'
                 : result.status === 'forbidden'
-                ? 'bg-rose-50 text-rose-600'
+                ? 'bg-rose-50 text-rose-600 border-rose-200'
                 : result.status === 'conditional'
-                ? 'bg-amber-100 text-amber-700'
-                : 'bg-emerald-100 text-emerald-700'
+                ? 'bg-amber-50 text-amber-700 border-amber-200'
+                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
             )}
           >
             {hasWarning ? (
-              <BatteryWarning size={22} strokeWidth={2.2} />
+              <BatteryWarning size={20} strokeWidth={2} />
             ) : result.status === 'forbidden' ? (
-              <Ban size={22} strokeWidth={2.2} />
+              <Ban size={20} strokeWidth={2} />
             ) : result.status === 'conditional' ? (
-              <HelpCircle size={22} strokeWidth={2.2} />
+              <HelpCircle size={20} strokeWidth={2} />
             ) : (
-              <CheckCircle2 size={22} strokeWidth={2.2} />
+              <CheckCircle2 size={20} strokeWidth={2} />
             )}
           </div>
 
@@ -123,12 +128,12 @@ export default function LuggageCard({
 
         {/* High Impact Warning Banner if Placement Wrong */}
         {hasWarning && (
-          <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 space-y-1 ponytail-spring">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-rose-700">
-              <AlertTriangle size={15} className="shrink-0 animate-bounce text-rose-600" />
-              <span>PERINGATAN BAHAYA PENEMPATAN!</span>
+          <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-rose-700">
+              <AlertTriangle size={15} className="shrink-0 text-rose-600" />
+              <span>Peringatan Penempatan Barang</span>
             </div>
-            <p className="text-xs leading-relaxed font-medium">{result.placementWarning}</p>
+            <p className="text-xs leading-relaxed font-normal">{result.placementWarning}</p>
           </div>
         )}
 
@@ -137,25 +142,36 @@ export default function LuggageCard({
           <span className="text-slate-500 font-medium">Penempatan Wajib:</span>
           <span
             className={clsx(
-              'px-2.5 py-0.5 rounded-full font-bold shadow-sm whitespace-nowrap',
+              'px-2.5 py-0.5 rounded-full font-semibold text-xs inline-flex items-center gap-1 whitespace-nowrap',
               isCabin
-                ? 'bg-primary-container text-white'
+                ? 'bg-sky-50 text-sky-700 border border-sky-200'
                 : isCheckin
-                ? 'bg-[#3ffdae] text-[#007149]'
-                : 'bg-slate-200 text-slate-700'
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                : 'bg-slate-100 text-slate-700 border border-slate-200'
             )}
           >
-            {isCabin
-              ? '🎒 Wajib Kabin'
-              : isCheckin
-              ? '🧳 Wajib Bagasi Kargo'
-              : '🎒/🧳 Bebas Kabin & Bagasi'}
+            {isCabin ? (
+              <>
+                <Backpack size={13} strokeWidth={2} />
+                <span>Wajib Kabin</span>
+              </>
+            ) : isCheckin ? (
+              <>
+                <Luggage size={13} strokeWidth={2} />
+                <span>Wajib Bagasi Kargo</span>
+              </>
+            ) : (
+              <>
+                <Check size={13} strokeWidth={2} />
+                <span>Bebas Kabin / Kargo</span>
+              </>
+            )}
           </span>
         </div>
 
         {/* Quick summary snippet if collapsed */}
         {!drawerOpen && result.reasons && result.reasons.length > 0 && !hasWarning && (
-          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
             {result.reasons[0]}
           </p>
         )}
@@ -166,27 +182,29 @@ export default function LuggageCard({
         <button
           type="button"
           onClick={() => setDrawerOpen(!drawerOpen)}
-          className="w-full py-1.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-between transition-colors tap-spring"
+          className="w-full py-1.5 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold flex items-center justify-between transition-colors active:scale-[0.98]"
         >
           <span>{drawerOpen ? 'Tutup Detail Regulasi' : 'Buka Regulasi & Tips Aman'}</span>
           <ChevronDown
-            size={16}
+            size={15}
+            strokeWidth={2}
             className={clsx(
-              'transition-transform duration-250',
-              drawerOpen && 'rotate-180 text-primary-container'
+              'transition-transform duration-200',
+              drawerOpen && 'rotate-180 text-sky-600'
             )}
           />
         </button>
 
         {drawerOpen && (
-          <div className="pt-2 text-xs space-y-3 animate-in fade-in-50 duration-200">
+          <div className="pt-2 text-xs space-y-3">
             {/* Reasons */}
             {result.reasons && result.reasons.length > 0 && (
-              <div className="space-y-1">
-                <span className="font-bold text-slate-800 uppercase tracking-wider text-[11px] block">
-                  📋 Alasan &amp; Ketentuan ICAO/IMO:
+              <div className="space-y-1.5">
+                <span className="font-semibold text-slate-700 text-xs flex items-center gap-1.5">
+                  <FileText size={14} className="text-slate-400" strokeWidth={2} />
+                  <span>Alasan &amp; Ketentuan ICAO/IMO:</span>
                 </span>
-                <ul className="space-y-1 text-slate-600 pl-3 list-disc">
+                <ul className="space-y-1 text-slate-600 pl-5 list-disc font-normal">
                   {result.reasons.map((r, i) => (
                     <li key={i} className="leading-relaxed">
                       {r}
@@ -198,11 +216,12 @@ export default function LuggageCard({
 
             {/* Tips */}
             {result.tips && result.tips.length > 0 && (
-              <div className="space-y-1">
-                <span className="font-bold text-emerald-800 uppercase tracking-wider text-[11px] block">
-                  💡 Tips Pengepakan Aman:
+              <div className="space-y-1.5">
+                <span className="font-semibold text-emerald-800 text-xs flex items-center gap-1.5">
+                  <Lightbulb size={14} className="text-emerald-600" strokeWidth={2} />
+                  <span>Tips Pengepakan Aman:</span>
                 </span>
-                <ul className="space-y-1 text-slate-600 pl-3 list-disc">
+                <ul className="space-y-1 text-slate-600 pl-5 list-disc font-normal">
                   {result.tips.map((t, i) => (
                     <li key={i} className="leading-relaxed">
                       {t}
@@ -214,9 +233,12 @@ export default function LuggageCard({
 
             {/* Customs Note */}
             {result.customsNote && (
-              <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900">
-                <span className="font-bold block text-[11px] mb-0.5">🛄 Catatan Bea Cukai:</span>
-                <p className="leading-relaxed">{result.customsNote}</p>
+              <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 space-y-1">
+                <span className="font-semibold text-xs flex items-center gap-1.5 text-amber-800">
+                  <ShieldCheck size={14} className="text-amber-600" strokeWidth={2} />
+                  <span>Catatan Bea Cukai:</span>
+                </span>
+                <p className="leading-relaxed text-xs font-normal">{result.customsNote}</p>
               </div>
             )}
           </div>
@@ -229,20 +251,20 @@ export default function LuggageCard({
             onClick={handleAdd}
             disabled={added}
             className={clsx(
-              'w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-sm mt-2 tap-spring',
+              'w-full py-2 px-3.5 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition-all mt-2 active:scale-[0.98]',
               added
                 ? 'bg-emerald-600 text-white'
-                : 'bg-white hover:bg-cyan-50 text-slate-800 border border-slate-200 hover:border-cyan-300'
+                : 'bg-white hover:bg-sky-50 text-slate-800 border border-slate-200 hover:border-sky-300'
             )}
           >
             {added ? (
               <>
-                <Check size={16} strokeWidth={2.5} />
+                <Check size={15} strokeWidth={2.2} />
                 <span>Tersimpan di Packing Checklist!</span>
               </>
             ) : (
               <>
-                <PlusCircle size={16} strokeWidth={2.2} />
+                <PlusCircle size={15} strokeWidth={2} />
                 <span>Tambahkan ke Packing Checklist</span>
               </>
             )}

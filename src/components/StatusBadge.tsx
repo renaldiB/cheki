@@ -53,13 +53,13 @@ export default function StatusBadge({ status, size = 'md', showLabel = true }: S
   return (
     <span
       className={clsx(
-        'inline-flex items-center border rounded-full font-bold tracking-tight select-none ponytail-spring',
+        'inline-flex items-center border rounded-full font-semibold tracking-tight select-none',
         cfg.badgeClass,
         sizeClasses[size]
       )}
     >
       <span className={clsx('w-1.5 h-1.5 rounded-full', cfg.dotClass)}></span>
-      <Icon size={iconSizes[size]} strokeWidth={2.4} className="shrink-0" />
+      <Icon size={iconSizes[size]} strokeWidth={2} className="shrink-0" />
       {showLabel && (
         <span className="font-sans whitespace-nowrap">{size === 'xs' ? cfg.shortLabel : cfg.label}</span>
       )}

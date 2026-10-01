@@ -25,10 +25,10 @@ const CHECKIN_FORBIDDEN = ['pisau', 'gunting besar', 'cutter', 'pedang', 'belati
 function inspectItemWarning(itemName: string, placement: PlacementType): string | undefined {
   const name = itemName.toLowerCase();
   if (placement === 'checkin' && CABIN_ONLY_KEYWORDS.some(kw => name.includes(kw))) {
-    return '⚠️ BATERAI/POWERBANK WAJIB DI KABIN! Dilarang di bagasi check-in kargo pesawat.';
+    return 'BATERAI/POWERBANK WAJIB DI KABIN! Dilarang di bagasi check-in kargo pesawat.';
   }
   if (placement === 'cabin' && CHECKIN_FORBIDDEN.some(kw => name.includes(kw))) {
-    return '🚫 BENDA TAJAM DILARANG DI KABIN! Wajib ditaruh di bagasi check-in.';
+    return 'BENDA TAJAM DILARANG DI KABIN! Wajib ditaruh di bagasi check-in.';
   }
   return undefined;
 }
@@ -207,44 +207,67 @@ export default function ChecklistPage() {
     saveLists(updated);
   };
 
-  if (!loaded || !currentList) return null;
+  if (!loaded || !currentList) {
+    return (
+      <div className="pb-32 sm:pb-36 md:pb-20 bg-cyber-dotmatrix min-h-screen">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-3.5 sm:px-6 pt-26 sm:pt-28 md:pt-32 space-y-5 sm:space-y-6">
+          <div className="w-full rounded-3xl bg-white shadow-sm border border-slate-200 p-5 sm:p-7 md:p-8 animate-pulse">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-2xl bg-slate-100 shrink-0" />
+                <div className="space-y-2">
+                  <div className="h-3 w-32 bg-slate-200 rounded" />
+                  <div className="h-6 w-56 bg-slate-200 rounded" />
+                  <div className="h-3.5 w-72 bg-slate-100 rounded" />
+                </div>
+              </div>
+              <div className="h-14 w-44 bg-slate-100 rounded-2xl" />
+            </div>
+          </div>
+          <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-4 animate-pulse">
+            <div className="h-11 bg-slate-100 rounded-2xl w-full" />
+            <div className="h-11 bg-slate-100 rounded-2xl w-full" />
+            <div className="space-y-2 pt-2">
+              {[1, 2, 3].map(n => (
+                <div key={n} className="h-14 bg-slate-50 border border-slate-100 rounded-2xl" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pb-32 sm:pb-36 md:pb-20 bg-cyber-dotmatrix min-h-screen">
-      {/* Background Ambient Glows */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-cyan-400/15 blur-3xl"></div>
-        <div className="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-emerald-400/15 blur-3xl"></div>
-      </div>
-
       <div className="relative z-10 max-w-[1280px] mx-auto px-3.5 sm:px-6 pt-26 sm:pt-28 md:pt-32 space-y-5 sm:space-y-6">
         {/* Top Header & Holographic Progress Card */}
-        <section className="w-full rounded-3xl bg-white/95 backdrop-blur-md shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 p-5 sm:p-7 md:p-8 ponytail-spring">
+        <section className="w-full rounded-3xl bg-white shadow-sm border border-slate-200 p-5 sm:p-7 md:p-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
             {/* Left Content with Cheki Mascot */}
             <div className="flex items-center gap-3.5 sm:gap-4">
-              <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 shrink-0">
+              <div className="w-14 h-14 sm:w-18 sm:h-18 shrink-0">
                 <img
                   src="/images/cheki-mascot.png"
                   alt="Chekii Mascot"
-                  className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,180,240,0.25)]"
+                  className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-primary-container uppercase tracking-wider block">
+                <span className="text-[11px] font-semibold text-sky-700 uppercase tracking-wider block">
                   Smart Packing Assistant
                 </span>
-                <h1 className="font-black text-xl sm:text-2xl md:text-3xl text-slate-900 tracking-tight mt-0.5">
+                <h1 className="font-bold text-xl sm:text-2xl md:text-3xl text-slate-900 tracking-tight mt-0.5">
                   Packing Checklist Cerdas
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl font-medium">
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl font-normal">
                   Kelola dan tandai barang di tas kabin dan koper kargo Anda. Sistem otomatis mendeteksi jika ada barang terlarang yang salah ditaruh di bagasi.
                 </p>
               </div>
             </div>
 
-            {/* Right Holographic Progress Gauge */}
-            <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-cyan-50/70 border border-cyan-200/80 shadow-sm shrink-0">
+            {/* Progress Gauge */}
+            <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm shrink-0">
               <div className="relative w-13 h-13 sm:w-14 sm:h-14 flex items-center justify-center">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
                   <path
@@ -255,7 +278,7 @@ export default function ChecklistPage() {
                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                   />
                   <path
-                    className="text-primary-container transition-all duration-500"
+                    className="text-sky-600 transition-all duration-500"
                     strokeDasharray={`${progressPercent}, 100`}
                     strokeWidth="3.5"
                     strokeLinecap="round"
@@ -264,17 +287,17 @@ export default function ChecklistPage() {
                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                   />
                 </svg>
-                <span className="absolute font-black text-xs text-slate-900">
+                <span className="font-bold text-xs text-slate-900 absolute">
                   {progressPercent}%
                 </span>
               </div>
 
               <div className="flex flex-col">
-                <span className="font-black text-sm text-slate-900">
+                <span className="font-bold text-sm text-slate-900">
                   {packedItems} dari {totalItems} Siap
                 </span>
-                <span className="text-[11px] text-slate-500 font-medium">
-                  {progressPercent === 100 ? '🎉 Siap Berangkat!' : 'Belum Selesai'}
+                <span className="text-[11px] text-slate-500 font-normal">
+                  {progressPercent === 100 ? 'Siap Berangkat' : 'Sedang Dipersiapkan'}
                 </span>
               </div>
             </div>
@@ -283,10 +306,10 @@ export default function ChecklistPage() {
 
         {/* Urgent Misplaced Dangerous Goods Alert */}
         {placementErrors.length > 0 && (
-          <div className="p-4 sm:p-5 rounded-3xl bg-rose-50 border-2 border-rose-300 shadow-sm space-y-3 ponytail-spring">
-            <div className="flex items-center gap-2 text-xs font-bold text-rose-800">
-              <AlertTriangle size={18} className="text-rose-600 animate-bounce shrink-0" />
-              <span>DITEMUKAN {placementErrors.length} BARANG BERBAHAYA SALAH PENEMPATAN!</span>
+          <div className="p-4 sm:p-5 rounded-3xl bg-rose-50 border border-rose-200 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-rose-800">
+              <AlertTriangle size={18} className="text-rose-600 shrink-0" />
+              <span>DITEMUKAN {placementErrors.length} BARANG BERBAHAYA SALAH PENEMPATAN</span>
             </div>
             <div className="space-y-2">
               {placementErrors.map(errItem => {
@@ -297,13 +320,16 @@ export default function ChecklistPage() {
                     className="p-3 bg-white rounded-2xl border border-rose-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs"
                   >
                     <div>
-                      <span className="font-black text-slate-900">{errItem.name}</span>
-                      <p className="text-rose-700 mt-0.5 font-medium">{inspectItemWarning(errItem.name, errItem.placement)}</p>
+                      <span className="font-bold text-slate-900">{errItem.name}</span>
+                      <p className="text-rose-700 mt-0.5 font-normal flex items-center gap-1.5">
+                        <AlertTriangle size={13} className="shrink-0 text-rose-600" />
+                        <span>{inspectItemWarning(errItem.name, errItem.placement)}</span>
+                      </p>
                     </div>
                     <button
                       type="button"
                       onClick={() => switchPlacement(errItem.id, targetPlacement)}
-                      className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shrink-0 transition-colors shadow-sm tap-spring"
+                      className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 shrink-0 transition-colors shadow-sm active:scale-[0.98]"
                     >
                       <ArrowLeftRight size={14} />
                       <span>Pindahkan ke {targetPlacement === 'cabin' ? 'Kabin' : 'Bagasi'}</span>
@@ -316,7 +342,7 @@ export default function ChecklistPage() {
         )}
 
         {/* Tab & Add Items Card */}
-        <section className="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-[0_8px_32px_-4px_rgba(0,180,240,0.08)] border border-cyan-100/90 space-y-5 ponytail-spring">
+        <section className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
           {/* Bag Tabs */}
           <div className="flex bg-slate-100 p-1 rounded-2xl gap-1 border border-slate-200/60">
             {BAG_TABS.map(tab => {
@@ -329,19 +355,19 @@ export default function ChecklistPage() {
                   type="button"
                   onClick={() => setActiveTab(tab.key)}
                   className={clsx(
-                    'flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all tap-spring',
+                    'flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl font-semibold text-xs sm:text-sm transition-all active:scale-[0.98]',
                     isSelected
-                      ? 'bg-white text-primary-container shadow-sm'
+                      ? 'bg-white text-sky-700 shadow-sm'
                       : 'text-slate-600 hover:text-slate-900'
                   )}
                 >
-                  <Icon size={16} strokeWidth={2.3} className="shrink-0" />
+                  <Icon size={16} strokeWidth={2} className="shrink-0" />
                   <span className="hidden sm:inline">{tab.label}</span>
                   <span className="sm:hidden">{tab.shortLabel}</span>
                   <span
                     className={clsx(
-                      'text-[10px] font-bold px-1.5 sm:px-2 py-0.2 rounded-full',
-                      isSelected ? 'bg-primary-container text-white' : 'bg-slate-200 text-slate-600'
+                      'text-[10px] font-semibold px-1.5 sm:px-2 py-0.2 rounded-full',
+                      isSelected ? 'bg-sky-600 text-white' : 'bg-slate-200 text-slate-600'
                     )}
                   >
                     {count}
@@ -353,7 +379,7 @@ export default function ChecklistPage() {
 
           {/* Quick Presets */}
           <div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
               Saran Cepat Packing:
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -362,7 +388,7 @@ export default function ChecklistPage() {
                   key={idx}
                   type="button"
                   onClick={() => addItem(preset.name, preset.placement)}
-                  className="px-3 py-1 bg-slate-50 hover:bg-cyan-50 hover:text-primary-container text-slate-600 text-xs font-semibold rounded-xl border border-slate-200 transition-colors tap-spring"
+                  className="px-3 py-1 bg-slate-50 hover:bg-sky-50 hover:text-sky-700 text-slate-600 text-xs font-medium rounded-xl border border-slate-200 hover:border-sky-200 transition-colors active:scale-[0.98]"
                 >
                   + {preset.name}
                 </button>
@@ -380,21 +406,21 @@ export default function ChecklistPage() {
               placeholder={`Tambah barang baru ke ${
                 activeTab === 'cabin' ? 'Tas Kabin' : activeTab === 'checkin' ? 'Bagasi Kargo' : 'Kapal'
               }...`}
-              className="flex-1 px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:border-primary-container font-medium"
+              className="flex-1 px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600 font-normal"
             />
             <button
               type="button"
               onClick={() => addItem()}
-              className="px-4 sm:px-5 py-2.5 sm:py-3 bg-primary-container hover:bg-cyan-600 text-white font-bold text-xs sm:text-sm rounded-2xl flex items-center gap-1.5 transition-colors shadow-sm shrink-0 tap-spring"
+              className="px-4 sm:px-5 py-2.5 sm:py-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs sm:text-sm rounded-2xl flex items-center gap-1.5 transition-colors shadow-sm shrink-0 active:scale-[0.98]"
             >
-              <Plus size={16} strokeWidth={2.5} />
+              <Plus size={16} strokeWidth={2} />
               <span>Tambah</span>
             </button>
           </div>
 
           {/* Filter options */}
           <div className="flex items-center justify-between border-t border-slate-100 pt-3 text-xs">
-            <span className="text-slate-500 font-semibold">
+            <span className="text-slate-500 font-medium">
               Menampilkan {currentTabItems.length} barang
             </span>
             <div className="flex gap-1 bg-slate-100 p-1 rounded-xl">
@@ -402,7 +428,7 @@ export default function ChecklistPage() {
                 type="button"
                 onClick={() => setFilterMode('all')}
                 className={clsx(
-                  'px-3 py-1 rounded-lg transition-all font-bold tap-spring',
+                  'px-3 py-1 rounded-lg transition-all font-semibold active:scale-[0.98]',
                   filterMode === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
                 )}
               >
@@ -412,7 +438,7 @@ export default function ChecklistPage() {
                 type="button"
                 onClick={() => setFilterMode('unpacked')}
                 className={clsx(
-                  'px-3 py-1 rounded-lg transition-all font-bold tap-spring',
+                  'px-3 py-1 rounded-lg transition-all font-semibold active:scale-[0.98]',
                   filterMode === 'unpacked' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
                 )}
               >
@@ -422,7 +448,7 @@ export default function ChecklistPage() {
                 type="button"
                 onClick={() => setFilterMode('packed')}
                 className={clsx(
-                  'px-3 py-1 rounded-lg transition-all font-bold tap-spring',
+                  'px-3 py-1 rounded-lg transition-all font-semibold active:scale-[0.98]',
                   filterMode === 'packed' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
                 )}
               >
@@ -434,12 +460,21 @@ export default function ChecklistPage() {
           {/* Items List */}
           <div className="space-y-2">
             {currentTabItems.length === 0 ? (
-              <div className="py-12 px-4 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50 space-y-2">
+              <div className="py-12 px-4 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50 space-y-3">
                 <Luggage size={36} className="mx-auto text-slate-300 stroke-1" />
-                <p className="font-bold text-slate-700 text-sm">Belum ada barang di {activeTab === 'cabin' ? 'Tas Kabin' : activeTab === 'checkin' ? 'Bagasi Kargo' : 'Tas Kapal'}.</p>
-                <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                  Gunakan kolom input di atas, klik saran cepat packing, atau simpan hasil analisa dari AI Luggage Scanner.
-                </p>
+                <div className="space-y-1">
+                  <p className="font-semibold text-slate-700 text-sm">Belum ada barang di {activeTab === 'cabin' ? 'Tas Kabin' : activeTab === 'checkin' ? 'Bagasi Kargo' : 'Tas Kapal'}.</p>
+                  <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                    Ketik barang baru pada kolom di atas atau gunakan saran cepat packing untuk memulai.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => addItem(activeTab === 'cabin' ? 'Paspor & Tiket Boarding' : 'Pakaian Ganti (3 set)')}
+                  className="px-3.5 py-1.5 text-xs font-semibold bg-white border border-slate-200 text-sky-700 rounded-xl hover:bg-slate-50 shadow-sm active:scale-[0.98] transition-all"
+                >
+                  + Tambah Contoh Barang
+                </button>
               </div>
             ) : (
               currentTabItems.map(item => {
@@ -448,12 +483,12 @@ export default function ChecklistPage() {
                   <div
                     key={item.id}
                     className={clsx(
-                      'p-3 sm:p-3.5 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 ponytail-spring',
+                      'p-3 sm:p-3.5 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 active:scale-[0.98]',
                       warningMsg
                         ? 'bg-rose-50/70 border-rose-300'
                         : item.checked
                         ? 'bg-slate-50/70 border-slate-200 opacity-60'
-                        : 'bg-white/90 border-cyan-100/90 shadow-sm hover:border-cyan-300'
+                        : 'bg-white border-slate-200 shadow-sm hover:border-slate-300'
                     )}
                   >
                     <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -461,12 +496,12 @@ export default function ChecklistPage() {
                         type="button"
                         onClick={() => toggleItem(item.id)}
                         className={clsx(
-                          'shrink-0 transition-transform tap-spring',
-                          item.checked ? 'text-primary-container' : 'text-slate-300 hover:text-slate-500'
+                          'shrink-0 transition-transform active:scale-[0.98]',
+                          item.checked ? 'text-sky-600' : 'text-slate-300 hover:text-slate-500'
                         )}
                       >
                         {item.checked ? (
-                          <CheckCircle2 size={22} className="text-primary-container" strokeWidth={2.4} />
+                          <CheckCircle2 size={22} className="text-sky-600" strokeWidth={2} />
                         ) : (
                           <Circle size={22} strokeWidth={1.8} />
                         )}
@@ -475,15 +510,16 @@ export default function ChecklistPage() {
                       <div className="min-w-0">
                         <span
                           className={clsx(
-                            'text-sm font-bold block truncate',
+                            'text-sm font-semibold block truncate',
                             item.checked ? 'line-through text-slate-400' : 'text-slate-900'
                           )}
                         >
                           {item.name}
                         </span>
                         {warningMsg && (
-                          <span className="text-[11px] font-bold text-rose-600 block mt-0.5">
-                            {warningMsg}
+                          <span className="text-[11px] font-semibold text-rose-600 flex items-center gap-1.5 mt-0.5">
+                            <AlertTriangle size={12} className="shrink-0 text-rose-600" />
+                            <span>{warningMsg}</span>
                           </span>
                         )}
                       </div>
@@ -498,7 +534,7 @@ export default function ChecklistPage() {
                             item.placement === 'cabin' ? 'checkin' : 'cabin'
                           )
                         }
-                        className="px-2.5 py-1 text-[11px] font-bold text-slate-500 hover:text-primary-container hover:bg-slate-100 rounded-lg transition-colors hidden sm:inline tap-spring"
+                        className="px-2.5 py-1 text-[11px] font-semibold text-slate-500 hover:text-sky-600 hover:bg-slate-100 rounded-lg transition-colors hidden sm:inline active:scale-[0.98]"
                         title="Pindahkan tas"
                       >
                         Pindah ke {item.placement === 'cabin' ? 'Bagasi' : 'Kabin'}
@@ -507,7 +543,7 @@ export default function ChecklistPage() {
                       <button
                         type="button"
                         onClick={() => removeItem(item.id)}
-                        className="p-1.5 text-slate-300 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors tap-spring"
+                        className="p-1.5 text-slate-300 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors active:scale-[0.98]"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -524,7 +560,7 @@ export default function ChecklistPage() {
               <button
                 type="button"
                 onClick={resetAllChecks}
-                className="px-3 py-1.5 font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors flex items-center gap-1.5 tap-spring"
+                className="px-3 py-1.5 font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors flex items-center gap-1.5 active:scale-[0.98]"
               >
                 <RotateCcw size={14} />
                 <span>Reset Centang</span>
@@ -533,7 +569,7 @@ export default function ChecklistPage() {
               <button
                 type="button"
                 onClick={() => setShowClearModal(true)}
-                className="px-3 py-1.5 font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors flex items-center gap-1.5 tap-spring"
+                className="px-3 py-1.5 font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors flex items-center gap-1.5 active:scale-[0.98]"
               >
                 <Trash2 size={14} />
                 <span>Kosongkan Checklist</span>

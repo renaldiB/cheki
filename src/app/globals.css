@@ -29,10 +29,11 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Light Cyber Ice dot-matrix background */
+/* Clean Neutral Dot Matrix Background */
 .bg-cyber-dotmatrix {
-  background-image: radial-gradient(rgba(0, 180, 240, 0.12) 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-color: #f8fafc;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.18) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* Custom scrollbar */
@@ -48,44 +49,41 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00b4f0;
+  background: #0284c7;
 }
 
-/* Glassmorphism Styles from Stitch - Optimized for 60/120fps */
-.glass-panel-ice {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 234, 254, 0.8);
-}
-
-.glass-panel-elevated {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 180, 240, 0.25);
-  box-shadow: 0 16px 40px -8px rgba(0, 180, 240, 0.14);
-}
-
-/* Ponytail Spring Physics & Micro-interactions */
-.ponytail-spring {
-  transition: all 0.35s cubic-bezier(0.34, 1.45, 0.64, 1);
-  will-change: transform, opacity;
-}
-
+/* Clean Micro-interactions & Motion */
 .tap-spring {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
 .tap-spring:active {
-  transform: scale(0.96);
+  transform: scale(0.98);
+}
+
+.ponytail-spring {
+  transition: transform 200ms ease-out, opacity 200ms ease-out, border-color 150ms ease-out;
 }
 
 .travel-card {
-  transition: transform 0.28s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.28s cubic-bezier(0.34, 1.45, 0.64, 1);
-  will-change: transform;
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 150ms ease-out;
 }
 .travel-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+}
+
+/* Staggered Row Animation */
+@keyframes rowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.row-fade {
+  animation: rowFadeIn 200ms ease-out both;
 }
 
 /* Hide scrollbar utility */
