@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronDown, Check } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -31,12 +32,84 @@ export default function CustomDropdown<T extends string | number>({
   size = 'md',
 }: CustomDropdownProps<T>) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+    width?: number;
+    minWidth?: number;
+    maxWidth?: string;
+  }>({});
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Calculate position when open
+  useEffect(() => {
+    if (!open) return;
+
+    const updatePosition = () => {
+      if (!triggerRef.current) return;
+      const rect = triggerRef.current.getBoundingClientRect();
+
+      // If trigger button scrolled out of viewport, auto-close
+      if (rect.bottom < 0 || rect.top > window.innerHeight) {
+        setOpen(false);
+        return;
+      }
+
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      // Flip upwards if less than 200px below and more space above
+      const openAbove = spaceBelow < 200 && spaceAbove > spaceBelow;
+
+      if (size === 'md') {
+        const left = Math.max(8, Math.min(rect.left, window.innerWidth - rect.width - 8));
+        setCoords({
+          top: openAbove ? undefined : rect.bottom + 6,
+          bottom: openAbove ? window.innerHeight - rect.top + 6 : undefined,
+          left,
+          width: Math.min(rect.width, window.innerWidth - 16),
+        });
+      } else {
+        const right = Math.max(8, window.innerWidth - rect.right);
+        setCoords({
+          top: openAbove ? undefined : rect.bottom + 6,
+          bottom: openAbove ? window.innerHeight - rect.top + 6 : undefined,
+          right,
+          minWidth: 220,
+          maxWidth: 'calc(100vw - 16px)',
+        });
+      }
+    };
+
+    updatePosition();
+
+    // Listen to resize and scroll (capture phase catches container scrolling)
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, true);
+
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition, true);
+    };
+  }, [open, size]);
 
   // Close on outside click or Escape key
   useEffect(() => {
+    if (!open) return;
+
     function handleOutsideClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        triggerRef.current && !triggerRef.current.contains(target) &&
+        menuRef.current && !menuRef.current.contains(target)
+      ) {
         setOpen(false);
       }
     }
@@ -52,13 +125,14 @@ export default function CustomDropdown<T extends string | number>({
       document.removeEventListener('mousedown', handleOutsideClick);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [open]);
 
   const selected = options.find(o => o.value === value);
 
   return (
-    <div ref={ref} className={clsx('relative inline-block text-left', className)}>
+    <div className={clsx('relative inline-block text-left', className)}>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen(!open)}
         className={clsx(
@@ -85,10 +159,24 @@ export default function CustomDropdown<T extends string | number>({
         />
       </button>
 
-      {open && (
+      {open && mounted && createPortal(
         <div
+          ref={menuRef}
+          style={{
+            position: 'fixed',
+            zIndex: 99999,
+            top: coords.top !== undefined ? `${coords.top}px` : undefined,
+            bottom: coords.bottom !== undefined ? `${coords.bottom}px` : undefined,
+            left: coords.left !== undefined ? `${coords.left}px` : undefined,
+            right: coords.right !== undefined ? `${coords.right}px` : undefined,
+            width: coords.width !== undefined ? `${coords.width}px` : undefined,
+            minWidth: coords.minWidth !== undefined ? `${coords.minWidth}px` : undefined,
+            maxWidth: coords.maxWidth,
+            maxHeight: 'min(320px, calc(100vh - 24px))',
+            overflowY: 'auto',
+          }}
           className={clsx(
-            'absolute right-0 z-[120] mt-1.5 min-w-[220px] w-full rounded-2xl bg-white border border-slate-200 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.15)] p-1.5 space-y-1 animate-in fade-in-50 zoom-in-95 duration-150',
+            'rounded-2xl bg-white border border-slate-200 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18)] p-1.5 space-y-1 animate-in fade-in-50 zoom-in-95 duration-150',
             menuClassName
           )}
         >
@@ -127,7 +215,8 @@ export default function CustomDropdown<T extends string | number>({
               </button>
             );
           })}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
