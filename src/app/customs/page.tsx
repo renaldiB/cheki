@@ -15,6 +15,7 @@ import {
   FileText,
   LucideIcon,
 } from 'lucide-react';
+import CustomDropdown, { DropdownOption } from '@/components/CustomDropdown';
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
   luggage: Luggage,
@@ -23,6 +24,15 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   banknote: Banknote,
   'file-text': FileText,
 };
+
+const TARIFF_OPTIONS: DropdownOption<number>[] = [
+  { value: 0, label: '0% — Buku, Alat Medis Tertentu', sublabel: 'Bebas Bea Masuk' },
+  { value: 5, label: '5% — Komputer, Laptop, Kamera Digital', sublabel: 'Elektronik Kerja' },
+  { value: 10, label: '10% — Smartphone Baru (IMEI), Elektronik Konsumen', sublabel: 'Gadget Pribadi' },
+  { value: 15, label: '15% — Pakaian Jadi, Tekstil, Mainan', sublabel: 'Fashion & Merchandise' },
+  { value: 20, label: '20% — Tas Branded, Sepatu Mewah', sublabel: 'Barang Fashion Mewah' },
+  { value: 30, label: '30% — Jam Tangan Mewah, Barang Tertentu', sublabel: 'Luxury Watch & Aksesoris' },
+];
 
 export default function CustomsPage() {
   const [activeTab, setActiveTab] = useState<'calculator' | string>('calculator');
@@ -223,18 +233,13 @@ export default function CustomsPage() {
                 <label className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
                   Kategori Barang &amp; Tarif Bea Masuk
                 </label>
-                <select
+                <CustomDropdown<number>
                   value={tariffRate}
-                  onChange={e => setTariffRate(Number(e.target.value))}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-sky-600"
-                >
-                  <option value={0}>0% — Buku, Alat Medis Tertentu</option>
-                  <option value={5}>5% — Komputer, Laptop, Kamera Digital</option>
-                  <option value={10}>10% — Smartphone Baru (IMEI), Elektronik Konsumen</option>
-                  <option value={15}>15% — Pakaian Jadi, Tekstil, Mainan</option>
-                  <option value={20}>20% — Tas Branded, Sepatu Mewah</option>
-                  <option value={30}>30% — Jam Tangan Mewah, Barang Tertentu</option>
-                </select>
+                  options={TARIFF_OPTIONS}
+                  onChange={val => setTariffRate(val)}
+                  className="w-full"
+                  size="md"
+                />
               </div>
 
               {/* NPWP Status Toggle */}

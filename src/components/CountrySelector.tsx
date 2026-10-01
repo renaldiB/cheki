@@ -171,8 +171,8 @@ export default function CountrySelector({
       {/* Custom Mode Active Input */}
       {isCustomMode ? (
         <div className="space-y-1.5">
-          <div className="relative flex items-center rounded-xl border-2 border-primary-container bg-cyan-50/50 shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-primary-container/20">
-            <div className="pl-3 text-primary-container shrink-0">
+          <div className="relative flex items-center rounded-2xl border-2 border-sky-600 bg-sky-50/50 shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-sky-500/20">
+            <div className="pl-3 text-sky-600 shrink-0">
               {isDomestic ? <MapPin size={18} /> : <Globe size={18} />}
             </div>
             <input
@@ -209,12 +209,12 @@ export default function CountrySelector({
                 setIsCustomMode(false);
                 setSearch('');
               }}
-              className="px-2.5 py-1 mr-1.5 text-xs font-semibold bg-white text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-100 shrink-0"
+              className="px-2.5 py-1 mr-1.5 text-xs font-semibold bg-white text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-100 shrink-0"
             >
               Daftar
             </button>
           </div>
-          <p className="text-[11px] text-primary-container font-medium pl-1 flex items-center gap-1">
+          <p className="text-[11px] text-sky-700 font-medium pl-1 flex items-center gap-1">
             <Sparkles size={12} className="shrink-0" />
             <span>AI akan menganalisa aturan khusus lokasi ini secara dinamis.</span>
           </p>
@@ -225,9 +225,9 @@ export default function CountrySelector({
           type="button"
           onClick={() => setOpen(!open)}
           className={clsx(
-            'w-full flex items-center justify-between px-3 sm:px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm text-left transition-all duration-150 shadow-sm min-w-0',
-            'bg-white hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container',
-            open ? 'border-primary-container ring-2 ring-primary-container/20' : 'border-slate-200',
+            'w-full flex items-center justify-between px-3 sm:px-3.5 py-2.5 rounded-2xl border text-xs sm:text-sm text-left transition-all duration-150 shadow-sm min-w-0 active:scale-[0.98]',
+            'bg-white hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600',
+            open ? 'border-sky-600 ring-2 ring-sky-500/20' : 'border-slate-200',
             !value && 'text-slate-400'
           )}
         >
@@ -296,7 +296,7 @@ export default function CountrySelector({
                     ? 'Cari kota, bandara, pelabuhan di ID...'
                     : 'Cari nama negara tujuan...'
                 }
-                className="w-full pl-9 pr-8 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container font-medium"
+                className="w-full pl-9 pr-8 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600 font-medium"
               />
               {search && (
                 <button
@@ -371,13 +371,13 @@ export default function CountrySelector({
                         setOpen(false);
                         setSearch('');
                       }}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-primary-container text-xs font-bold transition-colors border border-cyan-200"
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-semibold transition-colors border border-sky-200"
                     >
                       <div className="flex items-center gap-1.5 truncate">
                         <Sparkles size={14} className="shrink-0" />
                         <span className="truncate">Gunakan &quot;{search.trim()}&quot; (Analisa AI)</span>
                       </div>
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded font-mono font-bold shrink-0">
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded font-mono font-medium shrink-0">
                         Domestik
                       </span>
                     </button>
@@ -461,13 +461,13 @@ export default function CountrySelector({
                 enterCustomMode();
               }}
               onClick={enterCustomMode}
-              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-primary-container bg-cyan-50 hover:bg-cyan-100 transition-colors border border-cyan-200"
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 transition-colors border border-sky-200"
             >
               {isDomestic ? <MapPin size={14} /> : <Globe size={14} />}
               <span>
                 {isDomestic
-                  ? '📍 Ketik Kota / Pelabuhan Lainnya'
-                  : '🌍 Ketik Negara Lain (Analisa AI)'}
+                  ? 'Ketik Kota / Pelabuhan Lainnya'
+                  : 'Ketik Negara Lain (Analisa AI)'}
               </span>
             </button>
           </div>

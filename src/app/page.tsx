@@ -13,6 +13,7 @@ import {
   Ship,
   ArrowLeftRight,
   Luggage,
+  Backpack,
   Trash2,
   Plus,
   AlertTriangle,
@@ -26,6 +27,7 @@ import {
   Globe,
   RotateCcw,
 } from 'lucide-react';
+import CustomDropdown, { DropdownOption } from '@/components/CustomDropdown';
 
 type TransportMode = 'plane' | 'ship';
 
@@ -38,6 +40,12 @@ const FREQUENT_CHIPS = [
   { label: 'Spray Deodorant Aerosol 150ml', value: 'Parfum aerosol 150ml' },
   { label: 'Smartphone Baru Luar Negeri ($1,199)', value: 'Smartphone iPhone baru luar negeri' },
   { label: 'Kopi Bubuk Arabika Kemasan 250g', value: 'Kopi bubuk kemasan' },
+];
+
+const PLACEMENT_OPTIONS: DropdownOption<PlacementType>[] = [
+  { value: 'either', label: 'Bebas Pilih', icon: <ArrowLeftRight size={13} className="text-slate-400" /> },
+  { value: 'cabin', label: 'Rencana: Tas Kabin', icon: <Backpack size={13} className="text-sky-600" /> },
+  { value: 'checkin', label: 'Rencana: Bagasi Kargo', icon: <Luggage size={13} className="text-emerald-600" /> },
 ];
 
 export default function HomePage() {
@@ -522,20 +530,16 @@ export default function HomePage() {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0">
-                        <select
+                        <CustomDropdown<PlacementType>
                           value={item.placement}
-                          onChange={e => {
-                            const val = e.target.value as PlacementType;
+                          options={PLACEMENT_OPTIONS}
+                          onChange={val => {
                             setStructuredItems(prev =>
                               prev.map(i => (i.id === item.id ? { ...i, placement: val } : i))
                             );
                           }}
-                          className="px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-sky-600 text-slate-700"
-                        >
-                          <option value="either">Bebas Pilih</option>
-                          <option value="cabin">Rencana: Tas Kabin</option>
-                          <option value="checkin">Rencana: Bagasi Kargo</option>
-                        </select>
+                          size="sm"
+                        />
 
                         <button
                           type="button"
